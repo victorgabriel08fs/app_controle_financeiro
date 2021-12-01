@@ -14,7 +14,13 @@
                                 <div class="float-right">
                                     <a href="{{ route('registro.create') }}" class="btn btn-primary mb-3">Novo
                                         registro</a>
-                                    <p>Saldo: {{ $saldo }}</p>
+                                    @if ($saldo > 0)
+                                        <p class="positivo" }}>Saldo: {{ $saldo }}</p>
+                                    @elseif($saldo==0)
+                                        <p>Saldo: {{ $saldo }}</p>
+                                    @else
+                                        <p class="negativo" }}>Saldo: {{ $saldo }}</p>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -37,9 +43,9 @@
                                         <td>{{ $registro->nome }}</a>
                                         </td>
                                         @if ($registro->tipo)
-                                            <td class="valor entrada">+
+                                            <td class="valor positivo">+
                                             @else
-                                            <td class="valor saida">-
+                                            <td class="valor negativo">-
                                         @endif
                                         {{ number_format($registro->valor, 2) }}</td>
 

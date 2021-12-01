@@ -9,7 +9,21 @@ class Registro extends Model
 {
     use HasFactory;
 
-    public function user(){
+    protected $fillable = ['nome', 'tipo', 'valor', 'descricao', 'data', 'user_id'];
+
+    public function user()
+    {
         return $this->belongsTo('App\Models\User');
     }
+
+    public $regras = [
+        '' => '',
+        '' => '',
+        '' => '',
+    ];
+    public $feedbacks = [
+        '' => '',
+        '' => '',
+        '' => '',
+    ];
 }

@@ -20,6 +20,7 @@ class CreateRegistrosTable extends Migration
             $table->float('valor');
             $table->string('descricao')->nullable();
             $table->unsignedBigInteger('user_id');
+            $table->date('data');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

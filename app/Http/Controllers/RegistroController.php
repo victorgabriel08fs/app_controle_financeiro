@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Registro;
-use App\Http\Requests\StoreRegistroRequest;
-use App\Http\Requests\UpdateRegistroRequest;
+use Illuminate\Http\Request;
 
 class RegistroController extends Controller
 {
@@ -13,9 +12,21 @@ class RegistroController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct(Registro $registro)
+    {
+        $this->registro = $registro;
+    }
+
     public function index()
     {
-        //
+        $user_id = auth()->user()->id;
+        $registros = Registro::with('user')->get()->where('user_id', $user_id)->sortByDesc('data');
+        $entradas = Registro::where('user_id', $user_id)->where('tipo', 1)->sum('valor');
+        $saidas = Registro::where('user_id', $user_id)->where('tipo', 0)->sum('valor');
+        $saldo = $entradas - $saidas;
+        $saldo = number_format($saldo, 2);
+        return view('registro.index', ['registros' => $registros, 'saldo' => $saldo]);
     }
 
     /**
@@ -25,7 +36,7 @@ class RegistroController extends Controller
      */
     public function create()
     {
-        //
+        return view('registro.create');
     }
 
     /**
@@ -34,9 +45,12 @@ class RegistroController extends Controller
      * @param  \App\Http\Requests\StoreRegistroRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreRegistroRequest $request)
+    public function store(Request $request)
     {
-        //
+        $request->validate($this->registro->regras, $this->registro->feedbacks);
+
+        Registro::create($request->all());
+        return redirect()->route('registro.index');
     }
 
     /**
@@ -58,7 +72,7 @@ class RegistroController extends Controller
      */
     public function edit(Registro $registro)
     {
-        //
+        return view('registro.edit', ['registro' => $registro]);
     }
 
     /**
@@ -68,9 +82,13 @@ class RegistroController extends Controller
      * @param  \App\Models\Registro  $registro
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateRegistroRequest $request, Registro $registro)
+    public function update(Request $request, Registro $registro)
     {
-        //
+        $request->validate($this->registro->regras, $this->registro->feedbacks);
+
+        $registro->update($request->all());
+
+        return redirect()->route('registro.index');
     }
 
     /**
@@ -81,6 +99,8 @@ class RegistroController extends Controller
      */
     public function destroy(Registro $registro)
     {
-        //
+        $registro->delete();
+
+        return redirect()->route('registro.index');
     }
 }

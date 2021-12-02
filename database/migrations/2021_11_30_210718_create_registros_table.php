@@ -15,7 +15,6 @@ class CreateRegistrosTable extends Migration
     {
         Schema::create('registros', function (Blueprint $table) {
             $table->id();
-            $table->string('nome');
             $table->boolean('tipo');
             $table->float('valor');
             $table->string('descricao')->nullable();

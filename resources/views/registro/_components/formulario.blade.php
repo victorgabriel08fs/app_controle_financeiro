@@ -34,7 +34,8 @@
 <br>
 <div class="mb-3">
     <label class="form-label">Data</label>
-    <input type="date" class="form-control" name="data" value="{{ $registro->data ?? old('data') }}">
+    <input type="date" max="{{ date('Y-m-d') }}" class="form-control" name="data"
+        value="{{ $registro->data ?? old('data') }}">
     {{ $errors->has('data') ? $errors->first('data') : '' }}
 </div>
 <a href="{{ url()->previous() }}" class="btn btn-primary">Voltar</a>

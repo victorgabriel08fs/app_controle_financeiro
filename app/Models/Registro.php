@@ -17,13 +17,16 @@ class Registro extends Model
     }
 
     public $regras = [
-        '' => '',
-        '' => '',
-        '' => '',
+        'nome' => 'required',
+        'tipo' => 'required|boolean',
+        'valor' => 'required',
+        'descricao' => 'required',
+        'data' => 'required|date',
+        'user_id' => 'exists:users,id',
     ];
     public $feedbacks = [
-        '' => '',
-        '' => '',
-        '' => '',
+        'required' => 'O campo :attribute é um campo obrigatório.',
+        'tipo.boolean' => 'Este campo deve ser entrada ou saída.',
+        'date' => 'O campo :attribute deve ser uma data',
     ];
 }

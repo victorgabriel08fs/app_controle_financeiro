@@ -21,13 +21,25 @@ class RegistroController extends Controller
     public function index()
     {
         $user_id = auth()->user()->id;
-        $registros = Registro::with('user')->get()->where('user_id', $user_id)->sortByDesc('data');
+        $registros = Registro::with('user')->where('user_id', $user_id)->orderBy('data', 'desc')->paginate(10);
         $entradas = Registro::where('user_id', $user_id)->where('tipo', 1)->sum('valor');
         $saidas = Registro::where('user_id', $user_id)->where('tipo', 0)->sum('valor');
         $saldo = $entradas - $saidas;
         $saldo = number_format($saldo, 2);
         return view('registro.index', ['registros' => $registros, 'saldo' => $saldo]);
     }
+
+    public function sort($ordenacao)
+    {
+        $user_id = auth()->user()->id;
+        $registros = Registro::with('user')->where('user_id', $user_id)->orderBy($ordenacao, 'desc')->paginate(10);
+        $entradas = Registro::where('user_id', $user_id)->where('tipo', 1)->sum('valor');
+        $saidas = Registro::where('user_id', $user_id)->where('tipo', 0)->sum('valor');
+        $saldo = $entradas - $saidas;
+        $saldo = number_format($saldo, 2);
+        return view('registro.index', ['registros' => $registros, 'saldo' => $saldo]);
+    }
+
 
     /**
      * Show the form for creating a new resource.

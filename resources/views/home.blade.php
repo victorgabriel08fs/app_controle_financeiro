@@ -10,22 +10,19 @@
                     <div class="card-header">{{ __('Dashboard') }}</div>
 
                     <div class="card-body">
-                        <div>
-                            <input id="entradas" type="hidden" value={{ $entradas_porcento }}>
-                            <input id="saidas" type="hidden" value={{ $saidas_porcento }}>
-                            <canvas id="myChart" style="max-height: 200px;max-width:200px"></canvas>
+                        <div class="cards">
                             @if ($saidas_porcento != 0 || $entradas_porcento != 0)
+                                <h6 class="grafico-titulo">Relação entradas/saídas</h6>
+                                <canvas id="myChart" class="grafico"></canvas>
                                 <script>
                                     const ctx = document.getElementById('myChart').getContext('2d');
-                                    let saidas = document.getElementById('saidas').value;
-                                    let entradas = document.getElementById('entradas').value;
                                     const myChart = new Chart(ctx, {
                                         type: 'pie',
                                         data: {
                                             labels: ['Saídas', 'Entradas'],
                                             datasets: [{
-                                                label: '# of Votes',
-                                                data: [saidas, entradas],
+                                                label: 'Relação de entradas e saídas',
+                                                data: [<?php echo $saidas_porcento . ',' . $entradas_porcento; ?>],
                                                 backgroundColor: [
                                                     'rgba(255, 99, 132, 0.7)',
                                                     'rgba(0, 255, 0, 0.7)',
@@ -42,6 +39,38 @@
 
                                     });
                                 </script>
+                            @else
+                                <p>Insira registros para que possamos demonstra-los</p>
+                            @endif
+
+                            @if ($saidas_porcento != 0 || $entradas_porcento != 0)
+                                <h6 class="grafico-titulo">Saldo mensal</h6>
+                                <canvas id="myChart2" class="grafico"></canvas>
+
+                                <script>
+                                    const ctx2 = document.getElementById('myChart2').getContext('2d');
+                                    const myChart2 = new Chart(ctx2, {
+                                        type: 'line',
+                                        data: {
+                                            labels: [<?php for ($i = 1; $i <= 12; $i++) {
+    echo $i . ',';
+} ?>],
+                                            datasets: [{
+                                                label: 'Saldo mensal',
+
+                                                data: [<?php for ($i = 0; $i < 12; $i++) {
+    echo $saldo_mes[$i] . ',';
+} ?>],
+                                                fill: false,
+                                                borderColor: 'rgb(75, 192, 192)',
+                                                tension: 0.1
+                                            }]
+                                        }
+
+                                    })
+                                </script>
+                            @else
+
                             @endif
 
                         </div>

@@ -9,7 +9,7 @@ class Registro extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nome', 'tipo', 'valor', 'descricao', 'data', 'user_id'];
+    protected $fillable = ['tipo', 'valor', 'descricao', 'data', 'user_id'];
 
     public function user()
     {
@@ -17,7 +17,6 @@ class Registro extends Model
     }
 
     public $regras = [
-        'nome' => 'required',
         'tipo' => 'required|boolean',
         'valor' => 'required',
         'descricao' => 'required',

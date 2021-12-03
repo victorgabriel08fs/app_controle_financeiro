@@ -8,11 +8,6 @@
 @endif
 <input type="hidden" name="user_id" value={{ auth()->user()->id }}>
 <div class="mb-3">
-    <label class="form-label">Nome</label>
-    <input type="text" class="form-control" name="nome" value="{{ $registro->nome ?? old('nome') }}">
-    {{ $errors->has('nome') ? $errors->first('nome') : '' }}
-</div>
-<div class="mb-3">
     <label class="form-label">Valor</label>
     <input type="number" step="0.01" class="form-control" name="valor"
         value="{{ $registro->valor ?? old('valor') }}">

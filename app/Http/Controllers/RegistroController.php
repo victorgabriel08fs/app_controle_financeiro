@@ -26,6 +26,7 @@ class RegistroController extends Controller
         $saidas = Registro::where('user_id', $user_id)->where('tipo', 0)->sum('valor');
         $saldo = $entradas - $saidas;
         $saldo = number_format($saldo, 2);
+        
         return view('registro.index', ['registros' => $registros, 'saldo' => $saldo]);
     }
 

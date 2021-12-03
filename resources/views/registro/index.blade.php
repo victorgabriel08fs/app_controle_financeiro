@@ -31,9 +31,6 @@
                             <thead>
                                 <tr>
                                     <th scope="col"><a class="link"
-                                            href="{{ route('registro.sort', ['ordenacao' => 'nome']) }}">Nome</a>
-                                    </th>
-                                    <th scope="col"><a class="link"
                                             href="{{ route('registro.sort', ['ordenacao' => 'valor']) }}">Valor
                                             (R$)</a>
                                     </th>
@@ -48,8 +45,6 @@
                             <tbody>
                                 @foreach ($registros as $registro)
                                     <tr>
-                                        <td>{{ $registro->nome }}</a>
-                                        </td>
                                         @if ($registro->tipo)
                                             <td class="valor positivo">+
                                             @else

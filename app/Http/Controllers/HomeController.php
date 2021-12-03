@@ -38,12 +38,12 @@ class HomeController extends Controller
         }
         $saldo_mes = array();
         for ($i = 1; $i <= 12; $i++) {
-            if($i<10)
-            $mes='0'.$i;
+            if ($i < 10)
+                $mes = '0' . $i;
             else
-            $mes=$i;
+                $mes = $i;
             $entradas_mes = Registro::where('user_id', $user_id)->where('tipo', 1)->where('data', 'like', '%-' . $mes . '-%')->sum('valor');
-            $saidas_mes = Registro::where('user_id', $user_id)->where('tipo', 0)->where('data', 'like', '%-' . $i . '-%')->sum('valor');
+            $saidas_mes = Registro::where('user_id', $user_id)->where('tipo', 0)->where('data', 'like', '%-' . $mes . '-%')->sum('valor');
             array_push($saldo_mes, ($entradas_mes - $saidas_mes));
         }
 

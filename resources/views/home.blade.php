@@ -52,15 +52,19 @@
                                     const myChart2 = new Chart(ctx2, {
                                         type: 'line',
                                         data: {
-                                            labels: [<?php for ($i = 1; $i <= 12; $i++) {
-    echo $i . ',';
-} ?>],
+                                            labels: [
+                                                <?php for ($i = date('m') - 11; $i <= date('m'); $i++) {
+                                                    echo $i . ',';
+                                                } ?>
+                                            ],
                                             datasets: [{
                                                 label: 'Saldo mensal',
 
-                                                data: [<?php for ($i = 0; $i < 12; $i++) {
-    echo $saldo_mes[$i] . ',';
-} ?>],
+                                                data: [
+                                                    <?php for ($i = 0; $i < 12; $i++) {
+                                                        echo $saldo_mes[$i] . ',';
+                                                    } ?>
+                                                ],
                                                 fill: false,
                                                 borderColor: 'rgb(75, 192, 192)',
                                                 tension: 0.1

@@ -23,3 +23,4 @@ Route::middleware('auth')->get('/home', [App\Http\Controllers\HomeController::cl
 
 Route::middleware('auth')->resource('registro', 'RegistroController');
 Route::middleware('auth')->get('/registros/{ordenacao}', 'RegistroController@sort')->name('registro.sort');
+Route::middleware('auth')->get('/registros/show/{ano}', 'RegistroController@ano')->name('registro.ano');

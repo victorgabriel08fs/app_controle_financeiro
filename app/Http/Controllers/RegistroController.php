@@ -26,7 +26,7 @@ class RegistroController extends Controller
         $saidas = Registro::where('user_id', $user_id)->where('tipo', 0)->sum('valor');
         $saldo = $entradas - $saidas;
         $saldo = number_format($saldo, 2);
-        
+
         return view('registro.index', ['registros' => $registros, 'saldo' => $saldo]);
     }
 
@@ -36,6 +36,17 @@ class RegistroController extends Controller
         $registros = Registro::with('user')->where('user_id', $user_id)->orderBy($ordenacao, 'desc')->paginate(10);
         $entradas = Registro::where('user_id', $user_id)->where('tipo', 1)->sum('valor');
         $saidas = Registro::where('user_id', $user_id)->where('tipo', 0)->sum('valor');
+        $saldo = $entradas - $saidas;
+        $saldo = number_format($saldo, 2);
+        return view('registro.index', ['registros' => $registros, 'saldo' => $saldo]);
+    }
+
+    public function ano($ano)
+    {
+        $user_id = auth()->user()->id;
+        $registros = Registro::with('user')->where('user_id', $user_id)->where('data', 'like', $ano . '-%')->paginate(10);
+        $entradas = Registro::where('user_id', $user_id)->where('data', 'like', $ano . '-%')->where('tipo', 1)->sum('valor');
+        $saidas = Registro::where('user_id', $user_id)->where('data', 'like', $ano . '-%')->where('tipo', 0)->sum('valor');
         $saldo = $entradas - $saidas;
         $saldo = number_format($saldo, 2);
         return view('registro.index', ['registros' => $registros, 'saldo' => $saldo]);

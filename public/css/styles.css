@@ -28,14 +28,25 @@
     margin-right: 10px;
     margin-bottom: 10px;
 }
-.grafico-titulo{
+
+.grafico-titulo {
     font-weight: bold;
     color: gray;
 }
 
-.cards{
+.cards {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     width: 90%;
+}
+
+.ano {
+    list-style-type: none;
+    width: 100%;
+    background-color: white;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
 }

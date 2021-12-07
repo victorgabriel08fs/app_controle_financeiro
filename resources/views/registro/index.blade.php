@@ -14,6 +14,20 @@
                                 <div class="float-right">
                                     <a href="{{ route('registro.create') }}" class="btn btn-primary mb-3">Novo
                                         registro</a>
+                                    <li class="nav-item dropdown ano">
+                                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                            Ano
+                                        </a>
+
+                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                            @for ($i = 2020; $i <= date('Y'); $i++)
+                                                <a class="dropdown-item" href="">
+                                                    {{ $i }}
+                                                </a>
+                                            @endfor
+                                        </div>
+                                    </li>
                                     @if ($saldo > 0)
                                         <p class="valor positivo">Saldo: {{ $saldo }}</p>
                                     @elseif($saldo==0)

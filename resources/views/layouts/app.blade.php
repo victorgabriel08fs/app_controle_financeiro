@@ -72,8 +72,9 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                             document.getElementById('logout-form').submit();">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                                                     document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -93,6 +94,13 @@
             @yield('content')
         </main>
     </div>
+    <footer>
+        <p>{{ config('app.name', 'Laravel') }} é um sistema desenvolvimento por Victor Gabriel, únicamento para
+            aprendizado.
+            <br>
+            Acesse o <a target="_blank" href="https://github.com/victorgabriel08fs"><i class="fab fa-github"></i></a> para este e outros projetos
+        </p>
+    </footer>
 </body>
 
 </html>

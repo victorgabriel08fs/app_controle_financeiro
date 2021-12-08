@@ -20,6 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::middleware('auth')->get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware('auth')->get('/home/show/{ano}', 'HomeController@ano')->name('home.ano');
 
 Route::middleware('auth')->resource('registro', 'RegistroController');
 Route::middleware('auth')->get('/registros/{ordenacao}', 'RegistroController@sort')->name('registro.sort');

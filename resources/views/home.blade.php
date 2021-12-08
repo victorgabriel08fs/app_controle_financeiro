@@ -53,7 +53,7 @@
                                         type: 'line',
                                         data: {
                                             labels: [
-                                                <?php for ($i = date('m') - 11; $i <= date('m'); $i++) {
+                                                <?php for ($i = 1; $i <= 12; $i++) {
                                                     echo $i . ',';
                                                 } ?>
                                             ],

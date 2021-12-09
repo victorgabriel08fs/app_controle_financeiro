@@ -14,106 +14,114 @@
                                 <div class="float-right">
                                     <a href="{{ route('registro.create') }}" class="btn btn-primary mb-3">Novo
                                         registro</a>
-                                    <li class="nav-item dropdown ano">
-                                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                            Ano
-                                        </a>
+                                    @if (isset($regitros))
+                                        <li class="nav-item dropdown ano">
+                                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                                Ano
+                                            </a>
 
-                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="{{ route('registro.index') }}">Todos</a>
-                                            @for ($i = 2020; $i <= date('Y'); $i++)
-                                                <a class="dropdown-item"
-                                                    href="{{ route('registro.ano', ['ano' => $i]) }}">
-                                                    {{ $i }}
-                                                </a>
-                                            @endfor
-                                        </div>
-                                    </li>
-                                    @if ($saldo > 0)
-                                        <p class="valor positivo">Saldo: {{ $saldo }}</p>
-                                    @elseif($saldo==0)
-                                        <p>Saldo: {{ $saldo }}</p>
-                                    @else
-                                        <p class="valor negativo">Saldo: {{ $saldo }}</p>
+                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                                <a class="dropdown-item" href="{{ route('registro.index') }}">Todos</a>
+                                                @for ($i = 2020; $i <= date('Y'); $i++)
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('registro.ano', ['ano' => $i]) }}">
+                                                        {{ $i }}
+                                                    </a>
+                                                @endfor
+                                            </div>
+                                        </li>
+                                        @if ($saldo > 0)
+                                            <p class="valor positivo">Saldo: {{ $saldo }}</p>
+                                        @elseif($saldo==0)
+                                            <p>Saldo: {{ $saldo }}</p>
+                                        @else
+                                            <p class="valor negativo">Saldo: {{ $saldo }}</p>
+                                        @endif
                                     @endif
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="card-body">
+                        @if (isset($regitros))
 
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col"><a class="link"
-                                            href="{{ route('registro.sort', ['ordenacao' => 'valor']) }}">Valor
-                                            (R$)</a>
-                                    </th>
-                                    <th scope="col">Descrição</th>
-                                    <th scope="col"><a class="link"
-                                            href="{{ route('registro.sort', ['ordenacao' => 'data']) }}">Data</a>
-                                    </th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($registros as $registro)
+                            <table class="table">
+                                <thead>
                                     <tr>
-                                        @if ($registro->tipo)
-                                            <td class="valor positivo">+
-                                            @else
-                                            <td class="valor negativo">-
-                                        @endif
-                                        {{ number_format($registro->valor, 2) }}</td>
-
-                                        <td>{{ $registro->descricao }}</td>
-                                        <td>{{ date('d/m/Y', strtotime($registro->data)) }}</td>
-                                        <td><a href="{{ route('registro.edit', ['registro' => $registro]) }}"><i
-                                                    class="fas fa-pen"></i></a>
-                                        </td>
-                                        <td>
-                                            <form id="form_{{ $registro->id }}" method="POST"
-                                                action="{{ route('registro.destroy', ['registro' => $registro]) }}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <a href="#"
-                                                    onclick="document.getElementById('form_{{ $registro->id }}').submit()"><i
-                                                        class="fas fa-trash-alt"></i></a>
-                                            </form>
-                                        </td>
+                                        <th scope="col"><a class="link"
+                                                href="{{ route('registro.sort', ['ordenacao' => 'valor']) }}">Valor
+                                                (R$)</a>
+                                        </th>
+                                        <th scope="col">Descrição</th>
+                                        <th scope="col"><a class="link"
+                                                href="{{ route('registro.sort', ['ordenacao' => 'data']) }}">Data</a>
+                                        </th>
+                                        <th></th>
+                                        <th></th>
                                     </tr>
-                                @endforeach
+                                </thead>
+                                <tbody>
+                                    @foreach ($registros as $registro)
+                                        <tr>
+                                            @if ($registro->tipo)
+                                                <td class="valor positivo">+
+                                                @else
+                                                <td class="valor negativo">-
+                                            @endif
+                                            {{ number_format($registro->valor, 2) }}</td>
 
-                            </tbody>
-                        </table>
-                        <a href="{{ url()->previous() }}" class="btn btn-primary float-right">Voltar</a>
-                        <br>
-                        <br>
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    <a class="page-link" href="{{ $registros->previousPageUrl() }}"
-                                        aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                        <span class="sr-only">Previous</span>
-                                    </a>
-                                </li>
-                                @for ($i = 1; $i <= $registros->lastPage(); $i++)
-                                    <li class="page-item {{ $registros->currentPage() == $i ? 'active' : '' }}"><a
-                                            class="page-link"
-                                            href="{{ $registros->url($i) }}">{{ $i }}</a>
+                                            <td>{{ $registro->descricao }}</td>
+                                            <td>{{ date('d/m/Y', strtotime($registro->data)) }}</td>
+                                            <td><a href="{{ route('registro.edit', ['registro' => $registro]) }}"><i
+                                                        class="fas fa-pen"></i></a>
+                                            </td>
+                                            <td>
+                                                <form id="form_{{ $registro->id }}" method="POST"
+                                                    action="{{ route('registro.destroy', ['registro' => $registro]) }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <a href="#"
+                                                        onclick="document.getElementById('form_{{ $registro->id }}').submit()"><i
+                                                            class="fas fa-trash-alt"></i></a>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+
+                                </tbody>
+                            </table>
+
+                            <a href="{{ url()->previous() }}" class="btn btn-primary float-right">Voltar</a>
+                            <br>
+                            <br>
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                    <li class="page-item">
+                                        <a class="page-link" href="{{ $registros->previousPageUrl() }}"
+                                            aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
                                     </li>
-                                @endfor
-                                <li class="page-item">
-                                    <a class="page-link" href="{{ $registros->nextPageUrl() }}" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                        <span class="sr-only">Next</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
+                                    @for ($i = 1; $i <= $registros->lastPage(); $i++)
+                                        <li class="page-item {{ $registros->currentPage() == $i ? 'active' : '' }}"><a
+                                                class="page-link"
+                                                href="{{ $registros->url($i) }}">{{ $i }}</a>
+                                        </li>
+                                    @endfor
+                                    <li class="page-item">
+                                        <a class="page-link" href="{{ $registros->nextPageUrl() }}"
+                                            aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        @else
+                            <p>Insira registros para que possamos demonstra-los</p>
+                        @endif
                     </div>
                 </div>
             </div>

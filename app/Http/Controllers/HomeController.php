@@ -71,11 +71,11 @@ class HomeController extends Controller
                 $mes = '0' . $i;
             else
                 $mes = $i;
-            $entradas_mes = Registro::where('user_id', $user_id)->where('tipo', 1)->where('data', 'like', $ano . '-%')->where('data', 'like', '%-' . $mes . '-%')->sum('valor');
-            $saidas_mes = Registro::where('user_id', $user_id)->where('tipo', 0)->where('data', 'like', $ano . '-%')->where('data', 'like', '%-' . $mes . '-%')->sum('valor');
+            $entradas_mes = Registro::where('user_id', $user_id)->where('tipo', 1)->where('data', 'like', $ano . '-' . $mes . '-%')->sum('valor');
+            $saidas_mes = Registro::where('user_id', $user_id)->where('tipo', 0)->where('data', 'like', $ano . '-' . $mes . '-%')->sum('valor');
             array_push($saldo_mes, ($entradas_mes - $saidas_mes));
         }
 
-        return view('home', ['entradas_porcento' => $entradas_porcento, 'saidas_porcento' => $saidas_porcento, 'saldo_mes' => $saldo_mes]);
+        return view('home', ['entradas_porcento' => $entradas_porcento, 'saidas_porcento' => $saidas_porcento, 'saldo_mes' => $saldo_mes, 'ano' => $ano]);
     }
 }

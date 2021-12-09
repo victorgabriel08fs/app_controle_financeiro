@@ -8,21 +8,23 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">{{ __('Dashboard') }}</div>
-                    <li class="nav-item dropdown ano">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            Ano
-                        </a>
+                    @if ($saidas_porcento != 0 || $entradas_porcento != 0 || isset($ano))
+                        <li class="nav-item dropdown ano">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                Ano
+                            </a>
 
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('home') }}">Todos</a>
-                            @for ($i = 2020; $i <= date('Y'); $i++)
-                                <a class="dropdown-item" href="{{ route('home.ano', ['ano' => $i]) }}">
-                                    {{ $i }}
-                                </a>
-                            @endfor
-                        </div>
-                    </li>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('home') }}">Todos</a>
+                                @for ($i = 2020; $i <= date('Y'); $i++)
+                                    <a class="dropdown-item" href="{{ route('home.ano', ['ano' => $i]) }}">
+                                        {{ $i }}
+                                    </a>
+                                @endfor
+                            </div>
+                        </li>
+                    @endif
 
                     <div class="card-body">
                         <div class="cards">

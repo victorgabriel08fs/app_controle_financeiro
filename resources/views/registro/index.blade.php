@@ -14,7 +14,7 @@
                                 <div class="float-right">
                                     <a href="{{ route('registro.create') }}" class="btn btn-primary mb-3">Novo
                                         registro</a>
-                                    @if ($regitros)
+                                    @if (isset($regitros))
                                         <li class="nav-item dropdown ano">
                                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -44,7 +44,6 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        @if (isset($regitros))
 
                             <table class="table">
                                 <thead>
@@ -119,9 +118,7 @@
                                     </li>
                                 </ul>
                             </nav>
-                        @else
-                            <p>Insira registros para que possamos demonstra-los</p>
-                        @endif
+                       
                     </div>
                 </div>
             </div>

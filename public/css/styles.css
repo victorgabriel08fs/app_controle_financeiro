@@ -25,8 +25,8 @@
 .grafico {
     max-height: 250px;
     max-width: 250px;
-    margin-right: 10px;
-    margin-bottom: 10px;
+    margin-right: 20%;
+    margin-bottom: 20%;
 }
 
 .grafico-titulo {
@@ -57,16 +57,24 @@ footer {
     justify-content: center;
     text-align: center;
     flex-direction: column;
-    padding-bottom: 1em;
-    margin-left: auto;
-    margin-right: auto;
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    box-sizing: border-box;
 }
 
-.logo-link{
+.logo-link {
     text-decoration: none;
+}
+
+@media screen and (max-width: 600px) {
+    .cards {
+        display: flex;
+        flex-direction: column;
+    }
+
+    footer {
+        position: static;
+        padding: 5%;
+    }
 }

@@ -14,7 +14,7 @@
                                 <div class="float-right">
                                     <a href="{{ route('registro.create') }}" class="btn btn-primary mb-3">Novo
                                         registro</a>
-                                    @if (isset($regitros))
+                                    @if ($regitros)
                                         <li class="nav-item dropdown ano">
                                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

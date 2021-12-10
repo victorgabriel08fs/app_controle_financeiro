@@ -26,9 +26,11 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <h4 class="navbar-brand">
-                    {{ config('app.name', 'Laravel') }}
-                </h4>
+                <a href="{{ route('index') }}" class="logo-link">
+                    <h4 class="navbar-brand">
+                        {{ config('app.name', 'Laravel') }}
+                    </h4>
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -55,13 +57,14 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Entrar') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link"
+                                        href="{{ route('register') }}">{{ __('Cadastre-se') }}</a>
                                 </li>
                             @endif
                         @else
@@ -74,7 +77,7 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                                     document.getElementById('logout-form').submit();">
+                                                                                             document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -98,7 +101,8 @@
         <p>{{ config('app.name', 'Laravel') }} é um sistema desenvolvimento por Victor Gabriel, únicamento para
             aprendizado.
             <br>
-            Acesse o <a target="_blank" href="https://github.com/victorgabriel08fs"><i class="fab fa-github"></i></a> para este e outros projetos
+            Acesse o <a target="_blank" href="https://github.com/victorgabriel08fs"><i class="fab fa-github"></i></a>
+            para este e outros projetos
         </p>
     </footer>
 </body>

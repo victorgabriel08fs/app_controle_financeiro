@@ -57,7 +57,8 @@
                                     });
                                 </script>
                             @else
-                                <p>Insira registros para que possamos demonstra-los</p>
+                                <p><a href="{{ route('registro.create') }}">Insira registros</a> para que possamos
+                                    demonstra-los</p>
                             @endif
 
                             @if ($saidas_porcento != 0 || $entradas_porcento != 0)

@@ -67,14 +67,22 @@ footer {
     text-decoration: none;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 999px){
     .cards {
         display: flex;
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
     footer {
         position: static;
         padding: 5%;
+    }
+}
+
+@media screen and (max-width: 1400px) and (min-width:1000px) {
+    .cards {
+        width: 40%;
     }
 }

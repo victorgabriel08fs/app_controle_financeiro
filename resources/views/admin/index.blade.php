@@ -48,7 +48,6 @@
                                 })
                             </script>
                         </div>
-                        <div class="col">a</div>
                     </div>
                 </div>
             </div>

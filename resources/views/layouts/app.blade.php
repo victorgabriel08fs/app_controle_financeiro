@@ -49,9 +49,19 @@
                                     href="{{ route('registro.index') }}">{{ __('Registros') }}</a>
                             </li>
                             @if (auth()->user()->is_admin)
-                                <li class="nav-item">
-                                    <a class="nav-link"
-                                        href="{{ route('admin.dashboard') }}">{{ __('Painel Administrativo') }}</a>
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        Painel Administrativo
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
+                                            Dashboard
+                                        </a>
+                                        <a class="dropdown-item" href="{{ route('user.index') }}">
+                                            Usuários
+                                        </a>
+                                    </div>
                                 </li>
                             @endif
                         @endauth
@@ -85,7 +95,7 @@
                                     </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                                                                 document.getElementById('logout-form').submit();">
+                                                                                                                         document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 

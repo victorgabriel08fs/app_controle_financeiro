@@ -8,7 +8,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">{{ __('Dashboard') }}</div>
-                    @if ($saidas_porcento != 0 || $entradas_porcento != 0 || isset($ano))
+                    @if ($objeto->saidas_porcento != 0 || $objeto->entradas_porcento != 0 || isset($objeto->ano))
                         <li class="nav-item dropdown ano">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -28,7 +28,7 @@
 
                     <div class="card-body">
                         <div class="cards">
-                            @if ($saidas_porcento != 0 || $entradas_porcento != 0)
+                            @if ($objeto->saidas_porcento != 0 || $objeto->entradas_porcento != 0)
                                 <h6 class="grafico-titulo">Relação entradas/saídas</h6>
                                 <canvas id="myChart" class="grafico"></canvas>
                                 <script>
@@ -39,7 +39,7 @@
                                             labels: ['Saídas', 'Entradas'],
                                             datasets: [{
                                                 label: 'Relação de entradas e saídas',
-                                                data: [<?php echo $saidas_porcento . ',' . $entradas_porcento; ?>],
+                                                data: [<?php echo $objeto->saidas_porcento . ',' . $objeto->entradas_porcento; ?>],
                                                 backgroundColor: [
                                                     'rgba(255, 99, 132, 0.7)',
                                                     'rgba(0, 255, 0, 0.7)',
@@ -61,7 +61,7 @@
                                     demonstra-los</p>
                             @endif
 
-                            @if ($saidas_porcento != 0 || $entradas_porcento != 0)
+                            @if ($objeto->saidas_porcento != 0 || $objeto->entradas_porcento != 0)
                                 <h6 class="grafico-titulo">Saldo mensal</h6>
                                 <canvas id="myChart2" class="grafico"></canvas>
 
@@ -80,7 +80,7 @@
 
                                                 data: [
                                                     <?php for ($i = 0; $i < 12; $i++) {
-                                                        echo $saldo_mes[$i] . ',';
+                                                        echo $objeto->saldo_mes[$i] . ',';
                                                     } ?>
                                                 ],
                                                 fill: false,

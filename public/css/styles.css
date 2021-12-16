@@ -86,3 +86,17 @@ footer {
         width: 40%;
     }
 }
+
+.cards{
+    margin-left: 5%;
+}
+
+.left-labels{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.left-labels h4{
+    margin-right: 5%;
+}

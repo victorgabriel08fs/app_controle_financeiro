@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Registro;
+use App\Models\Objeto;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -48,7 +49,11 @@ class HomeController extends Controller
             array_push($saldo_mes, ($entradas_mes - $saidas_mes));
         }
 
-        return view('home', ['entradas_porcento' => $entradas_porcento, 'saidas_porcento' => $saidas_porcento, 'saldo_mes' => $saldo_mes]);
+        $objeto = new Objeto();
+        $objeto->entradas_porcento = $entradas_porcento;
+        $objeto->saidas_porcento = $saidas_porcento;
+        $objeto->saldo_mes = $saldo_mes;
+        return view('home', ['objeto' => $objeto]);
     }
 
     public function ano($ano)

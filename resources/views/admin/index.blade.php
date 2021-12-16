@@ -16,9 +16,9 @@
                                 demonstra-los</p> --}}
 
                             <div class="col left-labels">
-                                <h4>Total em movimentações: <br>R$
-                                    <strong>{{ number_format($objeto->movimentacoes, 2) }}</strong></h4>
-                                <h4>Total de movimentações: <br><strong>{{ $objeto->qnt_movimentacoes }}</strong></h4>
+                                <h5>Total em movimentações: <br>R$
+                                    <strong>{{ number_format($objeto->movimentacoes, 2) }}</strong></h5>
+                                <h5>Total de movimentações: <br><strong>{{ $objeto->qnt_movimentacoes }}</strong></h5>
                             </div>
 
                             <h6 class="grafico-titulo">Movimentações por mês</h6>

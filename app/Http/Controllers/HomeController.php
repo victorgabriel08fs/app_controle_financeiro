@@ -81,6 +81,11 @@ class HomeController extends Controller
             array_push($saldo_mes, ($entradas_mes - $saidas_mes));
         }
 
-        return view('home', ['entradas_porcento' => $entradas_porcento, 'saidas_porcento' => $saidas_porcento, 'saldo_mes' => $saldo_mes, 'ano' => $ano]);
+        $objeto = new Objeto();
+        $objeto->entradas_porcento = $entradas_porcento;
+        $objeto->saidas_porcento = $saidas_porcento;
+        $objeto->saldo_mes = $saldo_mes;
+        $objeto->ano = $ano;
+        return view('home', ['objeto' => $objeto]);
     }
 }

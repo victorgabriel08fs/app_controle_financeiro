@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Objeto;
 use App\Models\Registro;
 use Illuminate\Http\Request;
 
@@ -27,7 +28,10 @@ class RegistroController extends Controller
         $saldo = $entradas - $saidas;
         $saldo = number_format($saldo, 2);
 
-        return view('registro.index', ['registros' => $registros, 'saldo' => $saldo]);
+        $objeto = new Objeto();
+        $objeto->registros = $registros;
+        $objeto->saldo = $saldo;
+        return view('registro.index', ['objeto' => $objeto]);
     }
 
     public function sort($ordenacao)
@@ -38,7 +42,11 @@ class RegistroController extends Controller
         $saidas = Registro::where('user_id', $user_id)->where('tipo', 0)->sum('valor');
         $saldo = $entradas - $saidas;
         $saldo = number_format($saldo, 2);
-        return view('registro.index', ['registros' => $registros, 'saldo' => $saldo]);
+
+        $objeto = new Objeto();
+        $objeto->registros = $registros;
+        $objeto->saldo = $saldo;
+        return view('registro.index', ['objeto' => $objeto]);
     }
 
     public function ano($ano)
@@ -49,7 +57,11 @@ class RegistroController extends Controller
         $saidas = Registro::where('user_id', $user_id)->where('data', 'like', $ano . '-%')->where('tipo', 0)->sum('valor');
         $saldo = $entradas - $saidas;
         $saldo = number_format($saldo, 2);
-        return view('registro.index', ['registros' => $registros, 'saldo' => $saldo]);
+
+        $objeto = new Objeto();
+        $objeto->registros = $registros;
+        $objeto->saldo = $saldo;
+        return view('registro.index', ['objeto' => $objeto]);
     }
 
 

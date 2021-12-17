@@ -67,7 +67,7 @@ footer {
     text-decoration: none;
 }
 
-@media screen and (max-width: 999px){
+@media screen and (max-width: 999px) {
     .cards {
         display: flex;
         flex-direction: column;
@@ -87,16 +87,14 @@ footer {
     }
 }
 
-.cards{
-    margin-left: 5%;
-}
 
-.left-labels{
+
+.left-labels {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.left-labels h4{
+.left-labels h4 {
     margin-right: 5%;
 }

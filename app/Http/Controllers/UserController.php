@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Objeto;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,9 @@ class UserController extends Controller
     public function index()
     {
         $users = User::paginate(10);
-        return view('admin.user.index', ['users' => $users]);
+        $objeto = new Objeto();
+        $objeto->users = $users;
+        return view('admin.user.index', ['objeto' => $objeto]);
     }
 
     /**

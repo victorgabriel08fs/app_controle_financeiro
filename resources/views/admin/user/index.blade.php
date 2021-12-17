@@ -27,7 +27,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $user)
+                                @foreach ($objeto->users as $user)
                                     <tr>
 
                                         <td>{{ $user->id }}</td>
@@ -59,19 +59,21 @@
                         <nav aria-label="Page navigation example">
                             <ul class="pagination">
                                 <li class="page-item">
-                                    <a class="page-link" href="{{ $users->previousPageUrl() }}"
+                                    <a class="page-link" href="{{ $objeto->users->previousPageUrl() }}"
                                         aria-label="Previous">
                                         <span aria-hidden="true">&laquo;</span>
                                         <span class="sr-only">Previous</span>
                                     </a>
                                 </li>
-                                @for ($i = 1; $i <= $users->lastPage(); $i++)
-                                    <li class="page-item {{ $users->currentPage() == $i ? 'active' : '' }}"><a
-                                            class="page-link" href="{{ $users->url($i) }}">{{ $i }}</a>
+                                @for ($i = 1; $i <= $objeto->users->lastPage(); $i++)
+                                    <li class="page-item {{ $objeto->users->currentPage() == $i ? 'active' : '' }}"><a
+                                            class="page-link"
+                                            href="{{ $objeto->users->url($i) }}">{{ $i }}</a>
                                     </li>
                                 @endfor
                                 <li class="page-item">
-                                    <a class="page-link" href="{{ $users->nextPageUrl() }}" aria-label="Next">
+                                    <a class="page-link" href="{{ $objeto->users->nextPageUrl() }}"
+                                        aria-label="Next">
                                         <span aria-hidden="true">&raquo;</span>
                                         <span class="sr-only">Next</span>
                                     </a>

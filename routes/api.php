@@ -19,3 +19,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // Route::apiResource('registros', 'RegistroController');
+Route::prefix('api')->get('/teste', function () {
+    Mail::send('auth.passwords.email', function ($m) {
+        $m->from('contato.servidorlaravel@gmail.com', 'Controle Financeiro');
+        $m->subject('Teste');
+        $m->to('victorgabriel08fs@gmail.com');
+    });
+})->name('teste');

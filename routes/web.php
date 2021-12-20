@@ -19,13 +19,14 @@ Route::get('/', function () {
 
 Route::get('/acesso-negado')->name('acesso-negado');
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::middleware('auth')->get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::middleware('auth')->get('/home/show/{ano}', 'HomeController@ano')->name('home.ano');
-
-Route::middleware('auth')->middleware('admin')->prefix('/admin')->resource('user', 'UserController');
-Route::middleware('auth')->middleware('admin')->get('/admin/dashboard', 'AdminController@index')->name('admin.dashboard');
-Route::middleware('auth')->resource('registro', 'RegistroController');
-Route::middleware('auth')->get('/registros/{ordenacao}', 'RegistroController@sort')->name('registro.sort');
-Route::middleware('auth')->get('/registros/show/{ano}', 'RegistroController@ano')->name('registro.ano');
+Route::middleware('auth')->middleware('verified')->group(function () {
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/home/show/{ano}', 'HomeController@ano')->name('home.ano');
+    Route::middleware('admin')->prefix('/admin')->resource('user', 'UserController');
+    Route::middleware('admin')->get('/admin/dashboard', 'AdminController@index')->name('admin.dashboard');
+    Route::resource('registro', 'RegistroController');
+    Route::get('/registros/{ordenacao}', 'RegistroController@sort')->name('registro.sort');
+    Route::get('/registros/show/{ano}', 'RegistroController@ano')->name('registro.ano');
+});

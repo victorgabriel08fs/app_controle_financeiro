@@ -17,6 +17,11 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
+<<<<<<< HEAD
+=======
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ asset('images/coin.png') }}">
+>>>>>>> local
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">

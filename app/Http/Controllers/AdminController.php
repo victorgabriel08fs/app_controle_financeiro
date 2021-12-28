@@ -19,8 +19,14 @@ class AdminController extends Controller
         $entradas = Registro::where('tipo', 1)->sum('valor');
         $saidas = Registro::where('tipo', 0)->sum('valor');
 
-        $entradas_porcento = $entradas / ($entradas + $saidas) * 100;
-        $saidas_porcento = $saidas / ($entradas + $saidas) * 100;
+        if ($entradas > 0 && $saidas > 0) {
+            $entradas_porcento = $entradas / ($entradas + $saidas) * 100;
+            $saidas_porcento = $saidas / ($entradas + $saidas) * 100;
+        } else {
+            $entradas_porcento = 0;
+            $saidas_porcento = 0;
+        }
+
         $relacao = array();
         array_push($relacao, $entradas_porcento);
         array_push($relacao, $saidas_porcento);

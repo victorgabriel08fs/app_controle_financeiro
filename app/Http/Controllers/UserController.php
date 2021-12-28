@@ -16,7 +16,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::paginate(10);
+        $users = User::withTrashed()->paginate(10);
         $objeto = new Objeto();
         $objeto->users = $users;
         return view('admin.user.index', ['objeto' => $objeto]);

@@ -1,6 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+    @php
+    function formatCpf($value)
+    {
+        $cpf = preg_replace('/\D/', '', $value);
+
+        return preg_replace('/(\d{3})(\d{3})(\d{3})(\d{2})/', "\$1.\$2.\$3-\$4", $cpf);
+    }
+    @endphp
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -20,7 +28,9 @@
                                 <tr>
                                     <th scope="col">ID</th>
                                     <th scope="col">Nome</th>
+                                    <th scope="col">CPF</th>
                                     <th scope="col">Email</th>
+                                    <th scope="col">Permissão</th>
                                     <th scope="col">Status</th>
                                     <th></th>
                                     <th></th>
@@ -32,8 +42,12 @@
 
                                         <td>{{ $user->id }}</td>
                                         <td>{{ $user->name }}</td>
+                                        <td>@php
+                                            echo formatCpf($user->cpf);
+                                        @endphp</td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->is_admin ? 'Administrador' : 'Básico' }}</td>
+                                        <td>{{ $user->deleted_at ? 'Desativado' : 'Ativo' }}</td>
                                         <td><a href="{{ route('user.edit', ['user' => $user]) }}"><i
                                                     class="fas fa-pen"></i></a>
                                         </td>
@@ -73,9 +87,9 @@
                                 @endfor
                                 <li class="page-item">
                                     <a class="page-link" href="{{ $objeto->users->nextPageUrl() }}"
-                                        aria-label="Next">
+                                        aria-label="Próximo">
                                         <span aria-hidden="true">&raquo;</span>
-                                        <span class="sr-only">Next</span>
+                                        <span class="sr-only">Próximo</span>
                                     </a>
                                 </li>
                             </ul>

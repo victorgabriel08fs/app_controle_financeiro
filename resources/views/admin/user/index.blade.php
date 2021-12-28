@@ -52,14 +52,26 @@
                                                     class="fas fa-pen"></i></a>
                                         </td>
                                         <td>
-                                            <form id="form_{{ $user->id }}" method="POST"
-                                                action="{{ route('user.destroy', ['user' => $user]) }}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <a href="#"
-                                                    onclick="document.getElementById('form_{{ $user->id }}').submit()"><i
-                                                        class="fas fa-trash-alt"></i></a>
-                                            </form>
+                                            @if (!$user->deleted_at)
+                                                <form id="form_{{ $user->id }}" method="POST"
+                                                    action="{{ route('user.destroy', ['user' => $user]) }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <a href="#"
+                                                        onclick="document.getElementById('form_{{ $user->id }}').submit()"><i
+                                                            class="fas fa-trash-alt"></i></a>
+                                                </form>
+                                            @else
+                                                <form id="form_{{ $user->id }}" method="POST"
+                                                    action="{{ route('user.destroy', ['user' => $user]) }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <a href="#"
+                                                        onclick="document.getElementById('form_{{ $user->id }}').submit()"><i
+                                                            class="fas fa-trash-alt"></i></a>
+                                                </form>
+
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

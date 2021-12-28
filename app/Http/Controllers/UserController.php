@@ -91,4 +91,10 @@ class UserController extends Controller
         $user->delete();
         return redirect()->route('user.index');
     }
+
+    public function revive(User $user)
+    {
+        $user->restore();
+        return redirect()->route('user.index');
+    }
 }

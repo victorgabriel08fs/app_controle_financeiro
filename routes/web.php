@@ -32,7 +32,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/registros/{ordenacao}', 'RegistroController@sort')->name('registro.sort');
     Route::get('/registros/show/{ano}', 'RegistroController@ano')->name('registro.ano');
 
-    Route::get('/conta', 'ContaController@index');
+    Route::get('/conta', 'ContaController@index')->name('conta.index');
+    Route::post('/conta/deposito/{conta}', 'ContaController@deposito')->name('conta.deposito');
+    Route::post('/conta/saque/{conta}', 'ContaController@saque')->name('conta.saque');
 });
 // Route::middleware('auth')->middleware('verified')->group(function () {
 //     Route::get('/home', 'HomeController@index')->name('home');

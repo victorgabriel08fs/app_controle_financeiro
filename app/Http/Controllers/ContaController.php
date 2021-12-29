@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Conta;
 use App\Http\Requests\StoreContaRequest;
 use App\Http\Requests\UpdateContaRequest;
+use Illuminate\Http\Request;
 
 class ContaController extends Controller
 {
@@ -84,5 +85,14 @@ class ContaController extends Controller
     public function destroy(Conta $conta)
     {
         //
+    }
+
+    public function deposito(Conta $conta, Request $request)
+    {
+        echo 'deposito de ' . $request->valor;
+    }
+    public function saque(Conta $conta, Request $request)
+    {
+        echo 'saque de ' . $request->valor;
     }
 }

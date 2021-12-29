@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +26,7 @@ Auth::routes();
 Route::middleware('auth')->group(function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/home/show/{ano}', 'HomeController@ano')->name('home.ano');
+    Route::middleware('admin')->prefix('/admin')->post('/user/revive/{user_id}', 'UserController@revive')->name('user.revive');
     Route::middleware('admin')->prefix('/admin')->resource('user', 'UserController');
     Route::middleware('admin')->get('/admin/dashboard', 'AdminController@index')->name('admin.dashboard');
     Route::resource('registro', 'RegistroController');

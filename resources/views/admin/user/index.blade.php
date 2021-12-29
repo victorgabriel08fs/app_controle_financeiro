@@ -52,7 +52,7 @@
                                                     class="fas fa-pen"></i></a>
                                         </td>
                                         <td>
-                                            @if (!$user->deleted_at)
+                                            @if (!$user->trashed())
                                                 <form id="form_{{ $user->id }}" method="POST"
                                                     action="{{ route('user.destroy', ['user' => $user]) }}">
                                                     @csrf
@@ -63,22 +63,19 @@
                                                 </form>
                                             @else
                                                 <form id="form_{{ $user->id }}" method="POST"
-                                                    action="{{ route('user.destroy', ['user' => $user]) }}">
+                                                    action="{{ route('user.revive', ['user_id' => $user->id]) }}">
                                                     @csrf
-                                                    @method('DELETE')
+                                                    {{-- @method('put') --}}
                                                     <a href="#"
                                                         onclick="document.getElementById('form_{{ $user->id }}').submit()"><i
-                                                            class="fas fa-trash-alt"></i></a>
+                                                            class="fas fa-heartbeat"></i></a>
                                                 </form>
-
                                             @endif
                                         </td>
                                     </tr>
                                 @endforeach
-
                             </tbody>
                         </table>
-
                         <a href="{{ url()->previous() }}" class="btn btn-primary float-right">Voltar</a>
                         <br>
                         <br>
@@ -106,7 +103,6 @@
                                 </li>
                             </ul>
                         </nav>
-
                     </div>
                 </div>
             </div>

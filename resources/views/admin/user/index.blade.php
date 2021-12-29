@@ -59,16 +59,15 @@
                                                     @method('DELETE')
                                                     <a href="#"
                                                         onclick="document.getElementById('form_{{ $user->id }}').submit()"><i
-                                                            class="fas fa-trash-alt"></i></a>
+                                                            class="fas fa-trash-alt" alt="Excluir"></i></a>
                                                 </form>
                                             @else
                                                 <form id="form_{{ $user->id }}" method="POST"
                                                     action="{{ route('user.revive', ['user_id' => $user->id]) }}">
                                                     @csrf
-                                                    {{-- @method('put') --}}
                                                     <a href="#"
                                                         onclick="document.getElementById('form_{{ $user->id }}').submit()"><i
-                                                            class="fas fa-heartbeat"></i></a>
+                                                            class="fas fa-heartbeat" alt="Reativar"></i></a>
                                                 </form>
                                             @endif
                                         </td>

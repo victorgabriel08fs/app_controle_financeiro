@@ -31,6 +31,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('registro', 'RegistroController');
     Route::get('/registros/{ordenacao}', 'RegistroController@sort')->name('registro.sort');
     Route::get('/registros/show/{ano}', 'RegistroController@ano')->name('registro.ano');
+
+    Route::get('/conta', 'ContaController@index');
 });
 // Route::middleware('auth')->middleware('verified')->group(function () {
 //     Route::get('/home', 'HomeController@index')->name('home');

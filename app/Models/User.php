@@ -52,6 +52,10 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Registro');
     }
+    public function contas()
+    {
+        return $this->hasMany('App\Models\Conta');
+    }
 
     public function sendPasswordResetNotification($token)
     {

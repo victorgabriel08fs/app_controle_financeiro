@@ -15,4 +15,9 @@ class Conta extends Model
     {
         return $this->belongsTo('App\Models\User');
     }
+
+    public function movimentacoes()
+    {
+        return $this->hasMany('App\Models\Movimentacao');
+    }
 }

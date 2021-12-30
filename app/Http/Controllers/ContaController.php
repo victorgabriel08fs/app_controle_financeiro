@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Conta;
-use App\Http\Requests\StoreContaRequest;
-use App\Http\Requests\UpdateContaRequest;
 use Illuminate\Http\Request;
 
 class ContaController extends Controller
 {
+    public function __construct(Conta $conta)
+    {
+        $this->conta = $conta;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -91,16 +93,20 @@ class ContaController extends Controller
     {
         $conta->saldo = $conta->saldo + $request->valor;
         $conta->save();
-        return redirect()->route('conta.index', ['op'=>0,'status' => 1]);
+        return redirect()->route('conta.index');
     }
     public function saque(Conta $conta, Request $request)
     {
         if ($conta->saldo >= $request->valor) {
             $conta->saldo = $conta->saldo - $request->valor;
             $conta->save();
-            return redirect()->route('conta.index', ['op'=>1,'status' => 0]);
+            return redirect()->route('conta.index');
         } else {
-            return redirect()->route('conta.index', ['op'=>1,'status' => 1]);
+            return redirect()->route('conta.index');
         }
+    }
+    public function transfer(Conta $conta, Request $request)
+    {
+        
     }
 }

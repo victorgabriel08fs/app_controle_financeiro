@@ -13,21 +13,13 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="status">
-                            @isset($status)
-                                @if ($status)
-                                    <script>
-                                        alert('Olá')
-                                    </script>
-                                @endif
-                            @endisset
-                        </div>
                         <table class="table">
                             <thead>
                                 <tr>
                                     <th scope="col">Conta</th>
                                     <th>Tipo</th>
                                     <th>Saldo</th>
+                                    <th></th>
                                     <th></th>
                                     <th></th>
                                 </tr>
@@ -96,6 +88,42 @@
                                                             <div class="modal-body">
                                                                 <label for="valor">Valor</label>
                                                                 <input type="number" name="valor" id="saqueId">
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">Cancelar</button>
+                                                                <button type="submit"
+                                                                    class="btn btn-primary">Confirmar</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                data-target="#modalTransfer">
+                                                <i class="fas fa-share"></i>
+                                            </button>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="modalTransfer" tabindex="-1" role="dialog"
+                                                aria-labelledby="modalTransfer" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <form action="{{ route('conta.transfer', ['conta' => $conta]) }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="modalTransfer">Transferência
+                                                                </h5>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <label for="cpf">Beneficiário</label>
+                                                                <input type="text" name="cpf" id="cpfId"><br>
+                                                                <label for="valor">Valor</label>
+                                                                <input type="number" name="valor" id="valorId">
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary"

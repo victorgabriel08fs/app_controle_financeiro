@@ -95,8 +95,6 @@ class ContaController extends Controller
     {
         $conta->saldo = $conta->saldo + $request->valor;
         $conta->save();
-        $movimentacao = new Movimentacao();
-        $movimentacao->registro($conta->id, $conta->id, $request->valor, 0);
         return redirect()->route('conta.index');
     }
     public function saque(Conta $conta, Request $request)
@@ -109,12 +107,6 @@ class ContaController extends Controller
         }
         return redirect()->route('conta.index');
     }
-    public function arquivar()
-    {
-        Movimentacao::create(['conta_id' => $conta1->id, 'conta_id_2' => $conta2->id, 'valor' => $request->valor, 'tipo' => 1]);
-        Movimentacao::create(['conta_id' => $conta2->id, 'conta_id_2' => $conta1->id, 'valor' => $request->valor, 'tipo' => 0]);
-        Registro::create(['tipo' => $tipo, 'valor' => $valor, 'descricao' => $descricao, 'user_id' => $user_id, 'data' => date('d/m/Y', strtotime(now()))]);
-    }
     public function transfer(Conta $conta, Request $request)
     {
         $conta1 = $conta;
@@ -126,7 +118,9 @@ class ContaController extends Controller
                     $conta2->saldo = $conta2->saldo + $request->valor;
                     $conta1->save();
                     $conta2->save();
-                    arquivar();
+                    $movimentacao = new Movimentacao();
+                    $movimentacao->registro($conta1->id, $conta2->id, $request->valor, 1);
+                    $movimentacao->registro($conta2->id, $conta1->id, $request->valor, 0);
                 }
             }
         }

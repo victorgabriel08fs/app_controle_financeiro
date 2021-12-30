@@ -13,6 +13,15 @@
                         </div>
                     </div>
                     <div class="card-body">
+                        <div class="status">
+                            @isset($status)
+                                @if ($status)
+                                    <script>
+                                        alert('Olá')
+                                    </script>
+                                @endif
+                            @endisset
+                        </div>
                         <table class="table">
                             <thead>
                                 <tr>
@@ -29,8 +38,8 @@
                                         <td>{{ $conta->conta . '-' . $conta->digito }}</td>
                                         <td>{{ $conta->tipo ? 'Corrente' : 'Poupança' }}</td>
                                         @if ($conta->saldo > 0)
-                                            <td class="valor positivo">+
-                                            @elseif($conta->saldo < 0) <td class="valor negativo">-
+                                            <td class="valor positivo">
+                                            @elseif($conta->saldo < 0) <td class="valor negativo">
                                                 @else
                                             <td>
                                         @endif

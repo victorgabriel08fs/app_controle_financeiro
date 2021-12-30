@@ -89,10 +89,18 @@ class ContaController extends Controller
 
     public function deposito(Conta $conta, Request $request)
     {
-        echo 'deposito de ' . $request->valor;
+        $conta->saldo = $conta->saldo + $request->valor;
+        $conta->save();
+        return redirect()->route('conta.index', ['op'=>0,'status' => 1]);
     }
     public function saque(Conta $conta, Request $request)
     {
-        echo 'saque de ' . $request->valor;
+        if ($conta->saldo >= $request->valor) {
+            $conta->saldo = $conta->saldo - $request->valor;
+            $conta->save();
+            return redirect()->route('conta.index', ['op'=>1,'status' => 0]);
+        } else {
+            return redirect()->route('conta.index', ['op'=>1,'status' => 1]);
+        }
     }
 }

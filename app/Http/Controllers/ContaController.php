@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Conta;
+use App\Models\Movimentacao;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -94,6 +95,8 @@ class ContaController extends Controller
     {
         $conta->saldo = $conta->saldo + $request->valor;
         $conta->save();
+        $movimentacao = new Movimentacao();
+        $movimentacao->registro($conta->id, $conta->id, $request->valor, 0);
         return redirect()->route('conta.index');
     }
     public function saque(Conta $conta, Request $request)
@@ -101,8 +104,16 @@ class ContaController extends Controller
         if ($conta->saldo >= $request->valor) {
             $conta->saldo = $conta->saldo - $request->valor;
             $conta->save();
+            $movimentacao = new Movimentacao();
+            $movimentacao->registro($conta->id, $conta->id, $request->valor, 1);
         }
         return redirect()->route('conta.index');
+    }
+    public function arquivar()
+    {
+        Movimentacao::create(['conta_id' => $conta1->id, 'conta_id_2' => $conta2->id, 'valor' => $request->valor, 'tipo' => 1]);
+        Movimentacao::create(['conta_id' => $conta2->id, 'conta_id_2' => $conta1->id, 'valor' => $request->valor, 'tipo' => 0]);
+        Registro::create(['tipo' => $tipo, 'valor' => $valor, 'descricao' => $descricao, 'user_id' => $user_id, 'data' => date('d/m/Y', strtotime(now()))]);
     }
     public function transfer(Conta $conta, Request $request)
     {
@@ -115,6 +126,7 @@ class ContaController extends Controller
                     $conta2->saldo = $conta2->saldo + $request->valor;
                     $conta1->save();
                     $conta2->save();
+                    arquivar();
                 }
             }
         }

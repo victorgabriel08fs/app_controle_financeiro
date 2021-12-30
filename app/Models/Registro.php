@@ -28,4 +28,9 @@ class Registro extends Model
         'tipo.boolean' => 'Este campo deve ser entrada ou saída.',
         'date' => 'O campo :attribute deve ser uma data',
     ];
+
+    public function registro($tipo, $valor, $descricao, $user_id)
+    {
+        Registro::create(['tipo' => $tipo, 'valor' => $valor, 'descricao' => $descricao, 'user_id' => $user_id, 'data' => date('d/m/Y')]);
+    }
 }

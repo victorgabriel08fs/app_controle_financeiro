@@ -32,10 +32,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/registros/{ordenacao}', 'RegistroController@sort')->name('registro.sort');
     Route::get('/registros/show/{ano}', 'RegistroController@ano')->name('registro.ano');
 
-    Route::get('/conta', 'ContaController@index')->name('conta.index');
-    Route::post('/conta/deposito/{conta}', 'ContaController@deposito')->name('conta.deposito');
-    Route::post('/conta/saque/{conta}', 'ContaController@saque')->name('conta.saque');
-    Route::post('/conta/transfer/{conta}', 'ContaController@transfer')->name('conta.transfer');
+    Route::prefix('conta')->group(function () {
+        Route::get('/', 'ContaController@index')->name('conta.index');
+        Route::post('/deposito/{conta}', 'ContaController@deposito')->name('conta.deposito');
+        Route::post('/saque/{conta}', 'ContaController@saque')->name('conta.saque');
+        Route::post('/transfer/{conta}', 'ContaController@transfer')->name('conta.transfer');
+    });
 });
 // Route::middleware('auth')->middleware('verified')->group(function () {
 //     Route::get('/home', 'HomeController@index')->name('home');

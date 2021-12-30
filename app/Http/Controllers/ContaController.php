@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Conta;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ContaController extends Controller
@@ -100,13 +101,23 @@ class ContaController extends Controller
         if ($conta->saldo >= $request->valor) {
             $conta->saldo = $conta->saldo - $request->valor;
             $conta->save();
-            return redirect()->route('conta.index');
-        } else {
-            return redirect()->route('conta.index');
         }
+        return redirect()->route('conta.index');
     }
     public function transfer(Conta $conta, Request $request)
     {
-        
+        $conta1 = $conta;
+        $beneficiario = User::where('cpf', $request->cpf)->first();
+        if ($conta1->saldo >= $request->valor) {
+            foreach ($beneficiario->contas as $conta2) {
+                if ($conta2->tipo == $request->tipo && $conta1->id != $conta2->id) {
+                    $conta1->saldo = $conta1->saldo - $request->valor;
+                    $conta2->saldo = $conta2->saldo + $request->valor;
+                    $conta1->save();
+                    $conta2->save();
+                }
+            }
+        }
+        return redirect()->route('conta.index');
     }
 }

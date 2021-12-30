@@ -35,106 +35,41 @@
                                                 @else
                                             <td>
                                         @endif
-                                        {{ number_format($conta->saldo, 2) }}</td>
+                                        R$ {{ number_format($conta->saldo, 2) }}</td>
                                         <td>
                                             <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                data-target="#modalDeposito">
+                                                data-target="#modalDeposito_{{ $conta->id }}">
                                                 <i class="fas fa-piggy-bank"></i>
                                             </button>
 
                                             <!-- Modal -->
-                                            <div class="modal fade" id="modalDeposito" tabindex="-1" role="dialog"
-                                                aria-labelledby="modalDeposito" aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <form action="{{ route('conta.deposito', ['conta' => $conta]) }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="modalDeposito">Depósito</h5>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <label for="valor">Valor</label>
-                                                                <input type="number" name="valor" id="depositoId">
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary"
-                                                                    data-dismiss="modal">Cancelar</button>
-                                                                <button type="submit"
-                                                                    class="btn btn-primary">Confirmar</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            @component('conta._components.modals.deposito', ['conta' => $conta])
+
+                                            @endcomponent
+
                                         </td>
                                         <td>
                                             <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                data-target="#modalSaque">
+                                                data-target="#modalSaque_{{ $conta->id }}">
                                                 <i class="fas fa-money-bill-alt"></i>
                                             </button>
 
                                             <!-- Modal -->
-                                            <div class="modal fade" id="modalSaque" tabindex="-1" role="dialog"
-                                                aria-labelledby="modalSaque" aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <form action="{{ route('conta.saque', ['conta' => $conta]) }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="modalSaque">Saque</h5>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <label for="valor">Valor</label>
-                                                                <input type="number" name="valor" id="saqueId">
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary"
-                                                                    data-dismiss="modal">Cancelar</button>
-                                                                <button type="submit"
-                                                                    class="btn btn-primary">Confirmar</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            @component('conta._components.modals.saque', ['conta' => $conta])
 
+                                            @endcomponent
                                         </td>
                                         <td>
                                             <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                data-target="#modalTransfer">
+                                                data-target="#modalTransfer_{{ $conta->id }}">
                                                 <i class="fas fa-share"></i>
                                             </button>
 
                                             <!-- Modal -->
-                                            <div class="modal fade" id="modalTransfer" tabindex="-1" role="dialog"
-                                                aria-labelledby="modalTransfer" aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <form action="{{ route('conta.transfer', ['conta' => $conta]) }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="modalTransfer">Transferência
-                                                                </h5>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <label for="cpf">Beneficiário</label>
-                                                                <input type="text" name="cpf" id="cpfId"><br>
-                                                                <label for="valor">Valor</label>
-                                                                <input type="number" name="valor" id="valorId">
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary"
-                                                                    data-dismiss="modal">Cancelar</button>
-                                                                <button type="submit"
-                                                                    class="btn btn-primary">Confirmar</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            @component('conta._components.modals.transfer', ['conta' => $conta])
+
+                                            @endcomponent
+
 
                                         </td>
 

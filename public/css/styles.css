@@ -89,15 +89,28 @@ footer {
     }
 
     footer {
-        position: static;
+        position: fixed;
         padding: 5%;
+        bottom: 0;
     }
 
     .modal {
         width: 90%;
     }
 
+    table{
+        width: 150%;
+    }
+
+    .table {
+        overflow: auto;
+    }
+
+    .contas tr{
+        margin-bottom: 30px;
+    }
     
+
 }
 
 @media screen and (max-width: 1400px) and (min-width:1000px) {

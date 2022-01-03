@@ -13,72 +13,74 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Conta</th>
-                                    <th>Tipo</th>
-                                    <th>Saldo</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($contas as $conta)
+                        <div class="table">
+                            <table class="table">
+                                <thead>
                                     <tr>
-                                        <td>{{ $conta->conta . '-' . $conta->digito }}</td>
-                                        <td>{{ $conta->tipo ? 'Corrente' : 'Poupança' }}</td>
-                                        @if ($conta->saldo > 0)
-                                            <td class="valor positivo">
-                                            @elseif($conta->saldo < 0) <td class="valor negativo">
-                                                @else
-                                            <td>
-                                        @endif
-                                        R$ {{ number_format($conta->saldo, 2) }}</td>
-                                        <td>
-                                            <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                data-target="#modalDeposito_{{ $conta->id }}">
-                                                <i class="fas fa-piggy-bank"></i>
-                                            </button>
-
-                                            <!-- Modal -->
-                                            @component('conta._components.modals.deposito', ['conta' => $conta])
-
-                                            @endcomponent
-
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                data-target="#modalSaque_{{ $conta->id }}">
-                                                <i class="fas fa-money-bill-alt"></i>
-                                            </button>
-
-                                            <!-- Modal -->
-                                            @component('conta._components.modals.saque', ['conta' => $conta])
-
-                                            @endcomponent
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                data-target="#modalTransfer_{{ $conta->id }}">
-                                                <i class="fas fa-share"></i>
-                                            </button>
-
-                                            <!-- Modal -->
-                                            @component('conta._components.modals.transfer', ['conta' => $conta])
-
-                                            @endcomponent
-
-
-                                        </td>
-
-
+                                        <th scope="col">Conta</th>
+                                        <th>Tipo</th>
+                                        <th>Saldo</th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
                                     </tr>
-                                @endforeach
+                                </thead>
+                                <tbody>
+                                    @foreach ($contas as $conta)
+                                        <tr>
+                                            <td>{{ $conta->conta . '-' . $conta->digito }}</td>
+                                            <td>{{ $conta->tipo ? 'Corrente' : 'Poupança' }}</td>
+                                            @if ($conta->saldo > 0)
+                                                <td class="valor positivo">
+                                                @elseif($conta->saldo < 0) <td class="valor negativo">
+                                                    @else
+                                                <td>
+                                            @endif
+                                            R$ {{ number_format($conta->saldo, 2) }}</td>
+                                            <td>
+                                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                    data-target="#modalDeposito_{{ $conta->id }}">
+                                                    <i class="fas fa-piggy-bank"></i>
+                                                </button>
 
-                            </tbody>
-                        </table>
+                                                <!-- Modal -->
+                                                @component('conta._components.modals.deposito', ['conta' => $conta])
+
+                                                @endcomponent
+
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                    data-target="#modalSaque_{{ $conta->id }}">
+                                                    <i class="fas fa-money-bill-alt"></i>
+                                                </button>
+
+                                                <!-- Modal -->
+                                                @component('conta._components.modals.saque', ['conta' => $conta])
+
+                                                @endcomponent
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                    data-target="#modalTransfer_{{ $conta->id }}">
+                                                    <i class="fas fa-share"></i>
+                                                </button>
+
+                                                <!-- Modal -->
+                                                @component('conta._components.modals.transfer', ['conta' => $conta])
+
+                                                @endcomponent
+
+
+                                            </td>
+
+
+                                        </tr>
+                                    @endforeach
+
+                                </tbody>
+                            </table>
+                        </div>
 
                     </div>
                 </div>

@@ -42,52 +42,53 @@
                         </div>
                     </div>
                     <div class="card-body">
-
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col"><a class="link"
-                                            href="{{ route('registro.sort', ['ordenacao' => 'valor']) }}">Valor
-                                            (R$)</a>
-                                    </th>
-                                    <th scope="col">Descrição</th>
-                                    <th scope="col"><a class="link"
-                                            href="{{ route('registro.sort', ['ordenacao' => 'data']) }}">Data</a>
-                                    </th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($objeto->registros as $registro)
+                        <div class="table">
+                            <table class="table">
+                                <thead>
                                     <tr>
-                                        @if ($registro->tipo)
-                                            <td class="valor positivo">+
-                                            @else
-                                            <td class="valor negativo">-
-                                        @endif
-                                        {{ number_format($registro->valor, 2) }}</td>
-
-                                        <td>{{ $registro->descricao }}</td>
-                                        <td>{{ date('d/m/Y', strtotime($registro->data)) }}</td>
-                                        <td><a href="{{ route('registro.edit', ['registro' => $registro]) }}"><i
-                                                    class="fas fa-pen"></i></a>
-                                        </td>
-                                        <td>
-                                            <form id="form_{{ $registro->id }}" method="POST"
-                                                action="{{ route('registro.destroy', ['registro' => $registro]) }}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <a href="#"
-                                                    onclick="document.getElementById('form_{{ $registro->id }}').submit()"><i
-                                                        class="fas fa-trash-alt"></i></a>
-                                            </form>
-                                        </td>
+                                        <th scope="col"><a class="link"
+                                                href="{{ route('registro.sort', ['ordenacao' => 'valor']) }}">Valor
+                                                (R$)</a>
+                                        </th>
+                                        <th scope="col">Descrição</th>
+                                        <th scope="col"><a class="link"
+                                                href="{{ route('registro.sort', ['ordenacao' => 'data']) }}">Data</a>
+                                        </th>
+                                        {{-- <th></th> --}}
+                                        <th></th>
                                     </tr>
-                                @endforeach
+                                </thead>
+                                <tbody>
+                                    @foreach ($objeto->registros as $registro)
+                                        <tr>
+                                            @if ($registro->tipo)
+                                                <td class="valor positivo">+
+                                                @else
+                                                <td class="valor negativo">-
+                                            @endif
+                                            {{ number_format($registro->valor, 2) }}</td>
 
-                            </tbody>
-                        </table>
+                                            <td>{{ $registro->descricao }}</td>
+                                            <td>{{ date('d/m/Y', strtotime($registro->data)) }}</td>
+                                            {{-- <td><a href="{{ route('registro.edit', ['registro' => $registro]) }}"><i
+                                                    class="fas fa-pen"></i></a>
+                                        </td> --}}
+                                            <td>
+                                                <form id="form_{{ $registro->id }}" method="POST"
+                                                    action="{{ route('registro.destroy', ['registro' => $registro]) }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <a href="#"
+                                                        onclick="document.getElementById('form_{{ $registro->id }}').submit()"><i
+                                                            class="fas fa-trash-alt"></i></a>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+
+                                </tbody>
+                            </table>
+                        </div>
 
                         <a href="{{ url()->previous() }}" class="btn btn-primary float-right">Voltar</a>
                         <br>

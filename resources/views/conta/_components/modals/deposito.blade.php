@@ -11,7 +11,7 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label class="form-label" for="valor">Valor</label>
-                        <input class="form-control" type="number" name="valor" id="depositoId">
+                        <input class="form-control" type="number" step=".01" name="valor" id="depositoId">
                     </div>
                 </div>
                 <div class="modal-footer">

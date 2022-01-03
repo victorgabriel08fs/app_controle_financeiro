@@ -31,6 +31,6 @@ class Registro extends Model
 
     public function registro($tipo, $valor, $descricao, $user_id)
     {
-        Registro::create(['tipo' => $tipo, 'valor' => $valor, 'descricao' => $descricao, 'user_id' => $user_id, 'data' => date('d/m/Y')]);
+        Registro::create(['tipo' => $tipo, 'valor' => $valor, 'descricao' => $descricao, 'user_id' => $user_id, 'data' => date('Y-m-d')]);
     }
 }

@@ -16,7 +16,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="valor">Valor</label>
-                        <input class="form-control" type="number" name="valor" id="valorId">
+                        <input class="form-control" step=".01" type="number" name="valor" id="valorId">
                     </div>
                     <label class="form-label">Tipo</label>
                     <select class="form-select" name="tipo">

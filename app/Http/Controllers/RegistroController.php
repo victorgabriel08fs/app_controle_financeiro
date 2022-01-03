@@ -22,7 +22,7 @@ class RegistroController extends Controller
     public function index()
     {
         $user_id = auth()->user()->id;
-        $registros = Registro::with('user')->where('user_id', $user_id)->orderBy('data', 'desc')->paginate(10);
+        $registros = Registro::with('user')->where('user_id', $user_id)->orderBy('created_at', 'desc')->paginate(10);
         $entradas = Registro::where('user_id', $user_id)->where('tipo', 1)->sum('valor');
         $saidas = Registro::where('user_id', $user_id)->where('tipo', 0)->sum('valor');
         $saldo = $entradas - $saidas;

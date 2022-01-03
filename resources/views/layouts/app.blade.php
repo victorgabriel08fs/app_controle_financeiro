@@ -51,6 +51,10 @@
                                 <a class="nav-link"
                                     href="{{ route('registro.index') }}">{{ __('Registros') }}</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link"
+                                    href="{{ route('conta.index') }}">{{ __('Contas') }}</a>
+                            </li>
                             @if (auth()->user()->is_admin)
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"

@@ -17,7 +17,7 @@ class Movimentacao extends Model
         return $this->belongsTo('App\Models\Conta');
     }
 
-    public function registro($conta_id, $conta_id_2, $valor, $tipo)
+    public function registro($conta_id, $conta_id_2, $valor, $tipo, $descricao, $user_id)
     {
         Movimentacao::create(['conta_id' => $conta_id, 'conta_id_2' => $conta_id_2, 'valor' => $valor, 'tipo' => $tipo]);
         $registro = new Registro();
@@ -25,6 +25,7 @@ class Movimentacao extends Model
             $tipo = 1;
         else
             $tipo = 0;
-        $registro->registro($tipo, $valor, $descricao, $user_id);
+        if ($descricao != null)
+            $registro->registro($tipo, $valor, $descricao, $user_id);
     }
 }

@@ -23,14 +23,19 @@ Auth::routes();
 // Auth::routes(['verify' => true]);
 
 Route::middleware('auth')->group(function () {
-    Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/home/show/{ano}', 'HomeController@ano')->name('home.ano');
+
     Route::middleware('admin')->prefix('/admin')->post('/user/revive/{user_id}', 'UserController@revive')->name('user.revive');
     Route::middleware('admin')->prefix('/admin')->resource('user', 'UserController');
     Route::middleware('admin')->get('/admin/dashboard', 'AdminController@index')->name('admin.dashboard');
-    Route::resource('registro', 'RegistroController');
-    Route::get('/registros/{ordenacao}', 'RegistroController@sort')->name('registro.sort');
-    Route::get('/registros/show/{ano}', 'RegistroController@ano')->name('registro.ano');
+    Route::prefix('registros')->group(function () {
+        Route::get('/home', 'HomeController@index')->name('registro.home');
+        Route::get('/home/show/{ano}', 'HomeController@ano')->name('registro.home.ano');
+        Route::resource('registro', 'RegistroController');
+        Route::get('/{ordenacao}', 'RegistroController@sort')->name('registro.sort');
+        Route::get('/show/{ano}', 'RegistroController@ano')->name('registro.ano');
+    });
+
+    Route::get('/home', 'HomeController@home')->name('home');
 
     Route::prefix('conta')->group(function () {
         Route::get('/', 'ContaController@index')->name('conta.index');

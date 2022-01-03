@@ -31,7 +31,7 @@
 
 
         <main class="index-main">
-            <h1>Controle Financeiro</h1>
+            <h1>{{ config('app.name', 'Laravel') }}</h1>
             <p>Organize suas receitas e despesas de forma simples e rápida</p>
             <div>
                 <a href="{{ route('login') }}" class="btn btn-secondary mb-3">Entre</a>

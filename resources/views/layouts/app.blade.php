@@ -47,13 +47,22 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('home') }}">{{ __('Início') }}</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link"
-                                    href="{{ route('registro.index') }}">{{ __('Registros') }}</a>
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown1" class="nav-link dropdown-toggle" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Controle Financeiro
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown1">
+                                    <a class="dropdown-item" href="{{ route('registro.home') }}">
+                                        Home
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('registro.index') }}">
+                                        Histórico
+                                    </a>
+                                </div>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link"
-                                    href="{{ route('conta.index') }}">{{ __('Contas') }}</a>
+                                <a class="nav-link" href="{{ route('conta.index') }}">{{ __('Contas') }}</a>
                             </li>
                             @if (auth()->user()->is_admin)
                                 <li class="nav-item dropdown">
@@ -99,7 +108,7 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                                                                                     document.getElementById('logout-form').submit();">
+                                                                                                                                             document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 

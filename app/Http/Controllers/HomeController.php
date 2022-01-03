@@ -52,7 +52,7 @@ class HomeController extends Controller
         $objeto->entradas_porcento = $entradas_porcento;
         $objeto->saidas_porcento = $saidas_porcento;
         $objeto->saldo_mes = $saldo_mes;
-        return view('home', ['objeto' => $objeto]);
+        return view('registro.home', ['objeto' => $objeto]);
     }
 
     public function ano($ano)
@@ -85,6 +85,11 @@ class HomeController extends Controller
         $objeto->saidas_porcento = $saidas_porcento;
         $objeto->saldo_mes = $saldo_mes;
         $objeto->ano = $ano;
-        return view('home', ['objeto' => $objeto]);
+        return view('registro.home', ['objeto' => $objeto]);
+    }
+
+    public function home()
+    {
+        return view('home');
     }
 }

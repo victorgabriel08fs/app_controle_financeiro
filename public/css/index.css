@@ -38,3 +38,15 @@ body {
         position: absolute;
     }
 }
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    bottom: 0;
+}

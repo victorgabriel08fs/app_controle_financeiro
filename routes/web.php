@@ -59,7 +59,6 @@ Route::middleware('auth')->group(function () {
 //     Route::get('/registros/show/{ano}', 'RegistroController@ano')->name('registro.ano');
 // });
 
-
 Route::fallback(function () {
     return view('fallback');
 });

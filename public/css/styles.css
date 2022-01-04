@@ -1,3 +1,8 @@
+body{
+    overflow-y: auto;
+    height: 100vh;
+}
+
 /* webkit */
 body::-webkit-scrollbar {
     width: 6px;
@@ -64,15 +69,14 @@ body::-webkit-scrollbar-thumb:hover {
     font-weight: bold;
     margin-bottom: 10px;
 }
-
+main{
+    margin-bottom: 10%;
+}
 footer {
-    display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    flex-direction: column;
     position: absolute;
-    left: 0;
     width: 100%;
 }
 

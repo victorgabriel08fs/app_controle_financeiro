@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Conta;
 use App\Models\Registro;
 use App\Models\Objeto;
 
@@ -42,5 +43,12 @@ class AdminController extends Controller
         $objeto->relacao = $relacao;
 
         return view('admin.index', ['objeto' => $objeto]);
+    }
+
+    public function contas()
+    {
+        $contas = Conta::withTrashed()->orderBy('user_id')->get();
+
+        return view('admin.conta.index', ['contas' => $contas]);
     }
 }

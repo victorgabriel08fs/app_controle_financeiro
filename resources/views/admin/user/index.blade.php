@@ -1,14 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    @php
-    function formatCpf($value)
-    {
-        $cpf = preg_replace('/\D/', '', $value);
+    @component('_components.functions.formatCpf')
 
-        return preg_replace('/(\d{3})(\d{3})(\d{3})(\d{2})/', "\$1.\$2.\$3-\$4", $cpf);
-    }
-    @endphp
+    @endcomponent
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -66,7 +62,8 @@
                                                     action="{{ route('user.revive', ['user_id' => $user->id]) }}">
                                                     @csrf
                                                     <a href="#"
-                                                        onclick="document.getElementById('form_{{ $user->id }}').submit()"><i class="fas fa-trash-restore"></i>
+                                                        onclick="document.getElementById('form_{{ $user->id }}').submit()"><i
+                                                            class="fas fa-trash-restore"></i>
                                                 </form>
                                             @endif
                                         </td>

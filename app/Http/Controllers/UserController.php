@@ -88,19 +88,25 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        if (auth()->user()->id != $user->id)
+        if (auth()->user()->id != $user->id) {
+            // if ($user->contas) {
+            //     foreach ($user->contas as $conta)
+            //         $conta->delete();
+            // }
             $user->delete();
+        }
         return redirect()->route('user.index');
     }
 
     public function revive($user_id)
     {
-        $user_to_revive = (object)User::withTrashed()->find($user_id)->getAttributes();
-        $user = new User();
-        foreach ($user_to_revive as $key => $value) {
-            $user->$key = $value;
-        }
+        $user = User::withTrashed()->find($user_id);
+
         $user->restore();
+        // if ($user->contas) {
+        //     foreach ($user->contas as $conta)
+        //         $conta->restore();
+        // }
         return redirect()->route('user.index');
     }
 }

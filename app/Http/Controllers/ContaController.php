@@ -88,7 +88,20 @@ class ContaController extends Controller
      */
     public function destroy(Conta $conta)
     {
-        //
+        if (auth()->user()->is_admin)
+            $conta->delete();
+        return redirect()->route('admin.contas');
+    }
+
+    public function revive($conta_id)
+    {
+        $conta_to_revive = (object)conta::withTrashed()->find($conta_id)->getAttributes();
+        $conta = new conta();
+        foreach ($conta_to_revive as $key => $value) {
+            $conta->$key = $value;
+        }
+        $conta->restore();
+        return redirect()->route('admin.contas');
     }
 
     public function deposito(Conta $conta, Request $request)

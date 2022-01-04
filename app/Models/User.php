@@ -61,4 +61,6 @@ class User extends Authenticatable
     {
         $this->notify(new RedefinirSenhaNotification($token, $this->email, $this->name));
     }
+
+    
 }

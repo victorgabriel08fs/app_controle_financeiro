@@ -24,9 +24,14 @@ Auth::routes();
 
 Route::middleware('auth')->group(function () {
 
-    Route::middleware('admin')->prefix('/admin')->post('/user/revive/{user_id}', 'UserController@revive')->name('user.revive');
-    Route::middleware('admin')->prefix('/admin')->resource('user', 'UserController');
-    Route::middleware('admin')->get('/admin/dashboard', 'AdminController@index')->name('admin.dashboard');
+    Route::prefix('admin')->group(function () {
+        Route::middleware('admin')->post('/user/revive/{user_id}', 'UserController@revive')->name('user.revive');
+        Route::middleware('admin')->resource('user', 'UserController');
+        Route::middleware('admin')->get('/dashboard', 'AdminController@index')->name('admin.dashboard');
+        Route::middleware('admin')->get('/contas', 'AdminController@contas')->name('admin.contas');
+        Route::delete('/conta/{conta}', 'ContaController@destroy')->name('conta.destroy');
+        Route::middleware('admin')->post('/conta/revive/{conta_id}', 'ContaController@revive')->name('conta.revive');
+    });
     Route::prefix('registros')->group(function () {
         Route::get('/home', 'HomeController@index')->name('registro.home');
         Route::get('/home/show/{ano}', 'HomeController@ano')->name('registro.home.ano');

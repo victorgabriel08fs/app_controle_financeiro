@@ -21,6 +21,7 @@ class CreateContasTable extends Migration
             $table->float('saldo', 10, 2)->default(0);
             $table->boolean('tipo');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users');
         });

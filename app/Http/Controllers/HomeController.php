@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Endereco;
 use App\Models\Registro;
 use App\Models\Objeto;
+use App\Models\UserDado;
 
 class HomeController extends Controller
 {

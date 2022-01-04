@@ -18,7 +18,7 @@ class CreateContasTable extends Migration
             $table->string('conta')->unique();
             $table->string('digito');
             $table->unsignedBigInteger('user_id');
-            $table->float('saldo', 10, 2)->default(0);
+            $table->float('saldo', 12, 2)->default(0);
             $table->boolean('tipo');
             $table->timestamps();
             $table->softDeletes();

@@ -18,7 +18,7 @@ class CreateMovimentacoesTable extends Migration
             $table->integer('tipo');
             $table->unsignedBigInteger('conta_id');
             $table->unsignedBigInteger('conta_id_2');
-            $table->float('valor', 10, 2);
+            $table->float('valor', 12, 2);
             $table->timestamps();
 
             $table->foreign('conta_id')->references('id')->on('contas');

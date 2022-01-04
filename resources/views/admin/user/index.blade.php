@@ -43,7 +43,7 @@
                                         @endphp</td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->is_admin ? 'Administrador' : 'Básico' }}</td>
-                                        <td>{{ $user->deleted_at ? 'Desativado' : 'Ativo' }}</td>
+                                        <td>{{ $user->deleted_at ? 'Inativo' : 'Ativo' }}</td>
                                         <td><a href="{{ route('user.edit', ['user' => $user]) }}"><i
                                                     class="fas fa-pen"></i></a>
                                         </td>

@@ -45,7 +45,7 @@
                                                     <td>
                                                 @endif
                                                 R$ {{ number_format($conta->saldo, 2) }}</td>
-                                                <td>{{ $conta->deleted_at ? 'Desativada' : 'Ativa' }}</td>
+                                                <td>{{ $conta->deleted_at ? 'Inativa' : 'Ativa' }}</td>
                                                 <td>
                                                     @if (!$conta->trashed())
                                                         <form id="form_{{ $conta->id }}" method="POST"

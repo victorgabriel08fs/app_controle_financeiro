@@ -31,7 +31,6 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($contas as $conta)
-                                        {{-- @if (!$conta->deleted_at) --}}
 
                                             <tr>
                                                 <td>@php
@@ -68,7 +67,6 @@
                                                     @endif
                                                 </td>
                                             </tr>
-                                            {{-- @endif --}}
                                         @endforeach
 
                                 </tbody>

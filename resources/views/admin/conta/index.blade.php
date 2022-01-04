@@ -33,43 +33,43 @@
                                     @foreach ($contas as $conta)
                                         {{-- @if (!$conta->deleted_at) --}}
 
-                                        <tr>
-                                            <td>@php
-                                                echo formatCpf($conta->user->cpf);
-                                            @endphp</td>
-                                            <td>{{ $conta->conta . '-' . $conta->digito }}</td>
-                                            <td>{{ $conta->tipo ? 'Corrente' : 'Poupança' }}</td>
-                                            @if ($conta->saldo > 0)
-                                                <td class="valor positivo">
-                                                @elseif($conta->saldo < 0) <td class="valor negativo">
-                                                    @else
+                                            <tr>
+                                                <td>@php
+                                                    echo formatCpf($conta->user->cpf);
+                                                @endphp</td>
+                                                <td>{{ $conta->conta . '-' . $conta->digito }}</td>
+                                                <td>{{ $conta->tipo ? 'Corrente' : 'Poupança' }}</td>
+                                                @if ($conta->saldo > 0)
+                                                    <td class="valor positivo">
+                                                    @elseif($conta->saldo < 0) <td class="valor negativo">
+                                                        @else
+                                                    <td>
+                                                @endif
+                                                R$ {{ number_format($conta->saldo, 2) }}</td>
+                                                <td>{{ $conta->deleted_at ? 'Desativada' : 'Ativa' }}</td>
                                                 <td>
-                                            @endif
-                                            R$ {{ number_format($conta->saldo, 2) }}</td>
-                                            <td>{{ $conta->deleted_at ? 'Desativada' : 'Ativa' }}</td>
-                                            <td>
-                                                @if (!$conta->trashed())
-                                                    <form id="form_{{ $conta->id }}" method="POST"
-                                                        action="{{ route('conta.destroy', ['conta' => $conta]) }}">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <a href="#"
-                                                            onclick="document.getElementById('form_{{ $conta->id }}').submit()"><i
-                                                                class="fas fa-trash-alt"></i></a>
-                                                    </form>
-                                                @else
-                                                    <form id="form_{{ $conta->id }}" method="POST"
-                                                        action="{{ route('conta.revive', ['conta_id' => $conta->id]) }}">
-                                                        @csrf
-                                                        <a href="#"
-                                                            onclick="document.getElementById('form_{{ $conta->id }}').submit()"><i
-                                                                class="fas fa-trash-restore"></i>
-                                                    </form>
-                                                    {{-- @endif --}}
-                                            </td>
-                                        </tr>
-                                    @endif
-                                    @endforeach
+                                                    @if (!$conta->trashed())
+                                                        <form id="form_{{ $conta->id }}" method="POST"
+                                                            action="{{ route('conta.destroy', ['conta' => $conta]) }}">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <a href="#"
+                                                                onclick="document.getElementById('form_{{ $conta->id }}').submit()"><i
+                                                                    class="fas fa-trash-alt"></i></a>
+                                                        </form>
+                                                    @else
+                                                        <form id="form_{{ $conta->id }}" method="POST"
+                                                            action="{{ route('conta.revive', ['conta_id' => $conta->id]) }}">
+                                                            @csrf
+                                                            <a href="#"
+                                                                onclick="document.getElementById('form_{{ $conta->id }}').submit()"><i
+                                                                    class="fas fa-trash-restore"></i>
+                                                        </form>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                            {{-- @endif --}}
+                                        @endforeach
 
                                 </tbody>
                             </table>

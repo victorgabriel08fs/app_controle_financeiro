@@ -17,7 +17,9 @@ Route::get('/', function () {
     return view('index');
 })->name('index');
 
-Route::get('/acesso-negado')->name('acesso-negado');
+Route::get('/acesso-negado', function () {
+    return view('acesso-negado');
+})->name('acesso-negado');
 
 Auth::routes();
 // Auth::routes(['verify' => true]);

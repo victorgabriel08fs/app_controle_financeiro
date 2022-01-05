@@ -8,7 +8,7 @@
                     <div class="card-header">Nova Conta</div>
 
                     <div class="card-body">
-                        @component('admin.conta._components.formulario')
+                        @component('admin.conta._components.formulario',['objeto'=>$objeto])
 
                         @endcomponent
                     </div>

@@ -6,42 +6,24 @@
         <form action="{{ route('conta.store') }}" method="POST">
             @csrf
 @endif
-<input type="hidden" name="user_id" value={{ $user_id }}>
+<input type="hidden" name="user_id" value={{ $objeto->user_id }}>
 <div class="mb-3">
-    <label class="form-label">CEP</label>
-    <input type="text" class="form-control" name="cep" value="{{ $endereco->cep ?? old('cep') }}">
-    {{ $errors->has('cep') ? $errors->first('cep') : '' }}
+    <label class="form-label">Conta</label>
+    <input  type="text" class="form-control" name="conta" value="{{ $objeto->conta ?? old('conta') }}">
+    {{ $errors->has('conta') ? $errors->first('conta') : '' }}
 </div>
 <div class="mb-3">
-    <label class="form-label">Rua</label>
-    <input type="text" class="form-control" name="rua" value="{{ $endereco->rua ?? old('rua') }}">
-    {{ $errors->has('rua') ? $errors->first('rua') : '' }}
+    <label class="form-label">Digito</label>
+    <input  type="text" class="form-control" name="digito" value="{{ $objeto->digito ?? old('digito') }}">
+    {{ $errors->has('digito') ? $errors->first('digito') : '' }}
 </div>
 <div class="mb-3">
-    <label class="form-label">Número</label>
-    <input type="text" class="form-control" name="numero" value="{{ $endereco->numero ?? old('numero') }}">
-    {{ $errors->has('numero') ? $errors->first('numero') : '' }}
+    <label class="form-label">Tipo</label>
+    <select class="form-select" name="tipo">
+        <option value=0>Poupança</option>
+        <option value=1>Corrente</option>
+    </select>
 </div>
-<div class="mb-3">
-    <label class="form-label">Complemento</label>
-    <input type="text" class="form-control" name="complemento"
-        value="{{ $endereco->complemento ?? old('complemento') }}">
-    {{ $errors->has('complemento') ? $errors->first('complemento') : '' }}
-</div>
-<div class="mb-3">
-    <label class="form-label">Bairro</label>
-    <input type="text" class="form-control" name="bairro" value="{{ $endereco->bairro ?? old('bairro') }}">
-    {{ $errors->has('bairro') ? $errors->first('bairro') : '' }}
-</div>
-<div class="mb-3">
-    <label class="form-label">Cidade</label>
-    <input type="text" class="form-control" name="cidade" value="{{ $endereco->cidade ?? old('cidade') }}">
-    {{ $errors->has('cidade') ? $errors->first('cidade') : '' }}
-</div>
-<div class="mb-3">
-    <label class="form-label">Estado</label>
-    <input type="text" class="form-control" name="estado" value="{{ $endereco->estado ?? old('estado') }}">
-    {{ $errors->has('estado') ? $errors->first('estado') : '' }}
-</div>
+<a href="{{ url()->previous() }}" class="btn btn-primary">Voltar</a>
 <button type="submit" class="btn btn-primary">Salvar</button>
 </form>

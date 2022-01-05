@@ -33,7 +33,8 @@ Route::middleware('auth')->group(function () {
             Route::get('/dashboard', 'AdminController@index')->name('admin.dashboard');
             Route::get('/contas', 'AdminController@contas')->name('admin.contas');
             Route::delete('/conta/{conta}', 'ContaController@destroy')->name('conta.destroy');
-            Route::delete('/conta/create/{user_id}', 'ContaController@create')->name('conta.create');
+            Route::get('/conta/create/{user_id}', 'ContaController@create')->name('conta.create');
+            Route::post('/conta', 'ContaController@store')->name('conta.store');
             Route::post('/conta/revive/{conta_id}', 'ContaController@revive')->name('conta.revive');
         });
         Route::prefix('registros')->group(function () {

@@ -97,7 +97,7 @@ class RegistroController extends Controller
      */
     public function show(Registro $registro)
     {
-        //
+        return redirect()->route('acesso-negado');
     }
 
     /**

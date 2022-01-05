@@ -14,7 +14,7 @@ class UserDadosController extends Controller
      */
     public function index()
     {
-        //
+        return redirect()->route('acesso-negado');
     }
 
     /**
@@ -47,7 +47,7 @@ class UserDadosController extends Controller
      */
     public function show($id)
     {
-        //
+        return redirect()->route('acesso-negado');
     }
 
     /**
@@ -58,7 +58,7 @@ class UserDadosController extends Controller
      */
     public function edit($id)
     {
-        //
+        return redirect()->route('acesso-negado');
     }
 
     /**
@@ -70,7 +70,7 @@ class UserDadosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return redirect()->route('acesso-negado');
     }
 
     /**
@@ -81,6 +81,6 @@ class UserDadosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return redirect()->route('acesso-negado');
     }
 }

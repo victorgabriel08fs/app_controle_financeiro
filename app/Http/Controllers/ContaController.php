@@ -30,9 +30,19 @@ class ContaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($user_id)
     {
-        //
+        $contaDig = array();
+        for ($i = 0; $i < 5; $i++) {
+            $contaDig[0] += strval(rand(0, 9));
+        }
+        for ($i = 0; $i < 2; $i++) {
+            $contaDig[1] += strval(rand(0, 9));
+        }
+
+        $contas = Conta::where('conta', $contaDig[0])->where('digito', $contaDig[1])->get();
+        dd($contas);
+        return view('admin.conta.create', ['user_id' => $user_id]);
     }
 
     /**
@@ -43,7 +53,7 @@ class ContaController extends Controller
      */
     public function store(StoreContaRequest $request)
     {
-        //
+        return redirect()->route('acesso-negado');
     }
 
     /**
@@ -54,7 +64,7 @@ class ContaController extends Controller
      */
     public function show(Conta $conta)
     {
-        //
+        return redirect()->route('acesso-negado');
     }
 
     /**
@@ -65,7 +75,7 @@ class ContaController extends Controller
      */
     public function edit(Conta $conta)
     {
-        //
+        return redirect()->route('acesso-negado');
     }
 
     /**
@@ -77,7 +87,7 @@ class ContaController extends Controller
      */
     public function update(UpdateContaRequest $request, Conta $conta)
     {
-        //
+        return redirect()->route('acesso-negado');
     }
 
     /**

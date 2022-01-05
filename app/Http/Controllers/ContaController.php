@@ -33,22 +33,31 @@ class ContaController extends Controller
      */
     public function create($user_id)
     {
-        $contaDig = array();
-        $contaDig[0] = '';
-        $contaDig[1] = '';
-        for ($i = 0; $i < 5; $i++) {
-            $contaDig[0] = $contaDig[0] . strval(rand(0, 9));
+        $userContas = Conta::where('user_id', $user_id)->get();
+        $contador = 0;
+        foreach ($userContas as $conta) {
+            $contador++;
         }
-        for ($i = 0; $i < 2; $i++) {
-            $contaDig[1] = $contaDig[1] . strval(rand(0, 9));
-        }
-        $contas = Conta::where('conta', $contaDig[0])->where('digito', $contaDig[1])->get();
-        if (empty($contas->first())) {
-            $objeto = new Objeto();
-            $objeto->conta = $contaDig[0];
-            $objeto->digito = $contaDig[1];
-            $objeto->user_id = $user_id;
-            return view('admin.conta.create', ['objeto' => $objeto]);
+        if ($contador < 2) {
+            $contaDig = array();
+            $contaDig[0] = '';
+            $contaDig[1] = '';
+            for ($i = 0; $i < 5; $i++) {
+                $contaDig[0] = $contaDig[0] . strval(rand(0, 9));
+            }
+            for ($i = 0; $i < 2; $i++) {
+                $contaDig[1] = $contaDig[1] . strval(rand(0, 9));
+            }
+            $contas = Conta::where('conta', $contaDig[0])->where('digito', $contaDig[1])->get();
+            if (empty($contas->first())) {
+                $objeto = new Objeto();
+                $objeto->conta = $contaDig[0];
+                $objeto->digito = $contaDig[1];
+                $objeto->user_id = $user_id;
+                return view('admin.conta.create', ['objeto' => $objeto]);
+            }
+        } else {
+            return redirect()->route('admin.contas');
         }
     }
 

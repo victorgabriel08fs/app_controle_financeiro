@@ -13,7 +13,7 @@
     {{ $errors->has('conta') ? $errors->first('conta') : '' }}
 </div>
 <div class="mb-3">
-    <label class="form-label">Digito</label>
+    <label class="form-label">Dígito</label>
     <input  type="text" class="form-control" name="digito" value="{{ $objeto->digito ?? old('digito') }}">
     {{ $errors->has('digito') ? $errors->first('digito') : '' }}
 </div>

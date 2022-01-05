@@ -2,10 +2,12 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Endereco as ModelsEndereco;
+use App\Models\UserDado;
 use Closure;
 use Illuminate\Http\Request;
 
-class Completo
+class Endereco
 {
     /**
      * Handle an incoming request.
@@ -17,15 +19,11 @@ class Completo
     public function handle(Request $request, Closure $next)
     {
         $user_dado = UserDado::find(auth()->user()->user_dados->id);
-        $endereco = Endereco::where('user_dados_id', $user_dado->id)->get()->first();
-        if ($user_dado) {
-            if ($endereco) {
-                return $next($request);
-            } else {
-                return redirect()->route('endereco');
-            }
+        $endereco = ModelsEndereco::where('user_dados_id', $user_dado->id)->get()->first();
+        if ($endereco) {
+            return $next($request);
         } else {
-            return redirect()->route('user_dados');
+            return redirect()->route('endereco.create');
         }
     }
 }

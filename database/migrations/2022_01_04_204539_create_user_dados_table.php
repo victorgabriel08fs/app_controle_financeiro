@@ -17,7 +17,8 @@ class CreateUserDadosTable extends Migration
             $table->id();
             $table->string('telefone');
             $table->date('data_nasc');
-            $table->string('estado_civil');
+            $table->integer('estado_civil');
+            $table->integer('sexo');
             $table->unsignedBigInteger('user_id')->unique();
             $table->timestamps();
 

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class UserDado extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id', 'telefone', 'data_nasc', 'estado_civil'];
+    protected $fillable = ['user_id', 'telefone', 'data_nasc', 'estado_civil','sexo'];
 
     public function user()
     {
@@ -17,6 +17,6 @@ class UserDado extends Model
 
     public function endereco()
     {
-        return $this->hasOne('App\Models\Endereco');
+        return $this->hasOne('App\Models\Endereco','user_dados_id');
     }
 }

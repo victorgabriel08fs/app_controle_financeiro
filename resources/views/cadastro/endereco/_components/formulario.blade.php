@@ -9,7 +9,7 @@
 <input type="hidden" name="user_dados_id" value={{ auth()->user()->user_dados->id }}>
 <div class="mb-3">
     <label class="form-label">CEP</label>
-    <input type="number" class="form-control" name="cep" value="{{ $endereco->cep ?? old('cep') }}">
+    <input type="text" class="form-control" name="cep" value="{{ $endereco->cep ?? old('cep') }}">
     {{ $errors->has('cep') ? $errors->first('cep') : '' }}
 </div>
 <div class="mb-3">
@@ -18,7 +18,7 @@
     {{ $errors->has('rua') ? $errors->first('rua') : '' }}
 </div>
 <div class="mb-3">
-    <label class="form-label">Núemro</label>
+    <label class="form-label">Número</label>
     <input type="text" class="form-control" name="numero" value="{{ $endereco->numero ?? old('numero') }}">
     {{ $errors->has('numero') ? $errors->first('numero') : '' }}
 </div>

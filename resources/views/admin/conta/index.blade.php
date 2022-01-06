@@ -8,6 +8,9 @@
     @component('admin.conta._components.modals.cpf')
 
     @endcomponent
+    @component('admin.conta._components.modals.message', ['message' => $message])
+
+    @endcomponent
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -20,31 +23,10 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modalConta">
+                        <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modalCpf">
                             Nova Conta
                         </button>
-                        @if (isset($message))
-                            <br>
-                            <div id='texto' class="message">
-                                @if ($message == 0)
-                                    <h3 class="negativo">O usuário já possui os dois tipos de conta!</h1>
-                                    @elseif($message==1)
-                                        <h3 class="negativo">O usuário já possui uma conta deste tipo!</h1>
-                                        @else
-                                            <h3 class="positivo">Conta criada com sucesso!</h1>
-                                @endif
-                            </div>
-                        @endif
-                        <script>
-                            function init() {
-                                var div = document.getElementById("texto");
-                                var disp = div.style.display;
-                                setTimeout(() => {
-                                    div.style.display = "none";
-                                }, 5000);
-                            }
-                            init();
-                        </script>
+                        
                         <div class="table">
                             <table class="table">
                                 <thead>

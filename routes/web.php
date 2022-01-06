@@ -31,9 +31,10 @@ Route::middleware('auth')->group(function () {
             Route::post('/user/revive/{user_id}', 'UserController@revive')->name('user.revive');
             Route::resource('user', 'UserController');
             Route::get('/dashboard', 'AdminController@index')->name('admin.dashboard');
-            Route::get('/contas', 'AdminController@contas')->name('admin.contas');
+            Route::get('/contas/{message?}', 'AdminController@contas')->name('admin.contas');
             Route::delete('/conta/{conta}', 'ContaController@destroy')->name('conta.destroy');
-            Route::get('/conta/create/{user_id}', 'ContaController@create')->name('conta.create');
+            Route::get('/conta/create/{user}/{tipo?}', 'ContaController@create')->name('conta.create');
+            Route::post('/conta/cpf', 'ContaController@cpf')->name('conta.cpf');
             Route::post('/conta', 'ContaController@store')->name('conta.store');
             Route::post('/conta/revive/{conta_id}', 'ContaController@revive')->name('conta.revive');
         });

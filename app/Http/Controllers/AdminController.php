@@ -45,10 +45,10 @@ class AdminController extends Controller
         return view('admin.index', ['objeto' => $objeto]);
     }
 
-    public function contas()
+    public function contas($message=null)
     {
         $contas = Conta::withTrashed()->orderBy('user_id')->get();
 
-        return view('admin.conta.index', ['contas' => $contas]);
+        return view('admin.conta.index', ['contas' => $contas, 'message' => $message]);
     }
 }

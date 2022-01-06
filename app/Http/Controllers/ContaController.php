@@ -31,34 +31,49 @@ class ContaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($user_id)
+    public function cpf(Request $request)
     {
-        $userContas = Conta::where('user_id', $user_id)->get();
         $contador = 0;
+        $user = User::where('cpf', $request->cpf)->get()->first();
+        $userContas = Conta::where('user_id', $user->id)->get();
         foreach ($userContas as $conta) {
+            $tipo = $conta->tipo;
             $contador++;
         }
         if ($contador < 2) {
-            $contaDig = array();
-            $contaDig[0] = '';
-            $contaDig[1] = '';
-            for ($i = 0; $i < 5; $i++) {
-                $contaDig[0] = $contaDig[0] . strval(rand(0, 9));
-            }
-            for ($i = 0; $i < 2; $i++) {
-                $contaDig[1] = $contaDig[1] . strval(rand(0, 9));
-            }
-            $contas = Conta::where('conta', $contaDig[0])->where('digito', $contaDig[1])->get();
-            if (empty($contas->first())) {
-                $objeto = new Objeto();
-                $objeto->conta = $contaDig[0];
-                $objeto->digito = $contaDig[1];
-                $objeto->user_id = $user_id;
-                return view('admin.conta.create', ['objeto' => $objeto]);
-            }
+            if (isset($tipo))
+                return redirect()->route('conta.create', ['user' => $user, 'tipo' => !$tipo]);
+            else
+                return redirect()->route('conta.create', ['user' => $user, 'tipo' => null]);
         } else {
-            return redirect()->route('admin.contas');
+            $message = 0;
+            return redirect()->route('admin.contas', ['message' => $message]);
         }
+    }
+
+    public function create(User $user, $tipo = null)
+    {
+        $contaDig = array();
+        $contaDig['conta'] = '';
+        $contaDig['digito'] = '';
+        for ($i = 0; $i < 5; $i++) {
+            $contaDig['conta'] = $contaDig['conta'] . strval(rand(0, 9));
+        }
+        for ($i = 0; $i < 2; $i++) {
+            $contaDig['digito'] = $contaDig['digito'] . strval(rand(0, 9));
+        }
+        $contas = Conta::where('conta', $contaDig['conta'])->where('digito', $contaDig['digito'])->get();
+        if (empty($contas->first())) {
+            $objeto = new Objeto();
+            $objeto->conta = $contaDig['conta'];
+            $objeto->digito = $contaDig['digito'];
+            $objeto->user_id = $user->id;
+            if (isset($tipo)) {
+                $objeto->tipo = $tipo;
+            }
+            return view('admin.conta.create', ['objeto' => $objeto]);
+        }
+        return redirect()->route('admin.contas');
     }
 
     /**
@@ -69,7 +84,22 @@ class ContaController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        $userContas = Conta::where('user_id', $request->user_id)->get();
+        $corrente = 0;
+        $poupanca = 0;
+        foreach ($userContas as $conta) {
+            if ($conta->tipo == 0)
+                $poupanca++;
+            elseif ($conta->tipo == 1)
+                $corrente++;
+        }
+        if (($poupanca == 0 && $request->tipo == 0) || ($corrente == 0 && $request->tipo == 1)) {
+            Conta::create($request->all());
+            $message = 2;
+        } else {
+            $message = 1;
+        }
+        return redirect()->route('admin.contas', ['message' => $message]);
     }
 
     /**

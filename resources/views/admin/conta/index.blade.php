@@ -5,6 +5,9 @@
 
     @endcomponent
 
+    @component('admin.conta._components.modals.cpf')
+
+    @endcomponent
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -17,6 +20,31 @@
                         </div>
                     </div>
                     <div class="card-body">
+                        <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modalConta">
+                            Nova Conta
+                        </button>
+                        @if (isset($message))
+                            <br>
+                            <div id='texto' class="message">
+                                @if ($message == 0)
+                                    <h3 class="negativo">O usuário já possui os dois tipos de conta!</h1>
+                                    @elseif($message==1)
+                                        <h3 class="negativo">O usuário já possui uma conta deste tipo!</h1>
+                                        @else
+                                            <h3 class="positivo">Conta criada com sucesso!</h1>
+                                @endif
+                            </div>
+                        @endif
+                        <script>
+                            function init() {
+                                var div = document.getElementById("texto");
+                                var disp = div.style.display;
+                                setTimeout(() => {
+                                    div.style.display = "none";
+                                }, 5000);
+                            }
+                            init();
+                        </script>
                         <div class="table">
                             <table class="table">
                                 <thead>
@@ -32,42 +60,42 @@
                                 <tbody>
                                     @foreach ($contas as $conta)
 
-                                            <tr>
-                                                <td>@php
-                                                    echo formatCpf($conta->user->cpf);
-                                                @endphp</td>
-                                                <td>{{ $conta->conta . '-' . $conta->digito }}</td>
-                                                <td>{{ $conta->tipo ? 'Corrente' : 'Poupança' }}</td>
-                                                @if ($conta->saldo > 0)
-                                                    <td class="valor positivo">
-                                                    @elseif($conta->saldo < 0) <td class="valor negativo">
-                                                        @else
-                                                    <td>
-                                                @endif
-                                                R$ {{ number_format($conta->saldo, 2) }}</td>
-                                                <td>{{ $conta->deleted_at ? 'Inativa' : 'Ativa' }}</td>
-                                                <td>
-                                                    @if (!$conta->trashed())
-                                                        <form id="form_{{ $conta->id }}" method="POST"
-                                                            action="{{ route('conta.destroy', ['conta' => $conta]) }}">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <a href="#"
-                                                                onclick="document.getElementById('form_{{ $conta->id }}').submit()"><i
-                                                                    class="fas fa-trash-alt"></i></a>
-                                                        </form>
+                                        <tr>
+                                            <td>@php
+                                                echo formatCpf($conta->user->cpf);
+                                            @endphp</td>
+                                            <td>{{ $conta->conta . '-' . $conta->digito }}</td>
+                                            <td>{{ $conta->tipo ? 'Corrente' : 'Poupança' }}</td>
+                                            @if ($conta->saldo > 0)
+                                                <td class="valor positivo">
+                                                @elseif($conta->saldo < 0) <td class="valor negativo">
                                                     @else
-                                                        <form id="form_{{ $conta->id }}" method="POST"
-                                                            action="{{ route('conta.revive', ['conta_id' => $conta->id]) }}">
-                                                            @csrf
-                                                            <a href="#"
-                                                                onclick="document.getElementById('form_{{ $conta->id }}').submit()"><i
-                                                                    class="fas fa-trash-restore"></i>
-                                                        </form>
-                                                    @endif
-                                                </td>
-                                            </tr>
-                                        @endforeach
+                                                <td>
+                                            @endif
+                                            R$ {{ number_format($conta->saldo, 2) }}</td>
+                                            <td>{{ $conta->deleted_at ? 'Inativa' : 'Ativa' }}</td>
+                                            <td>
+                                                @if (!$conta->trashed())
+                                                    <form id="form_{{ $conta->id }}" method="POST"
+                                                        action="{{ route('conta.destroy', ['conta' => $conta]) }}">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <a href="#"
+                                                            onclick="document.getElementById('form_{{ $conta->id }}').submit()"><i
+                                                                class="fas fa-trash-alt"></i></a>
+                                                    </form>
+                                                @else
+                                                    <form id="form_{{ $conta->id }}" method="POST"
+                                                        action="{{ route('conta.revive', ['conta_id' => $conta->id]) }}">
+                                                        @csrf
+                                                        <a href="#"
+                                                            onclick="document.getElementById('form_{{ $conta->id }}').submit()"><i
+                                                                class="fas fa-trash-restore"></i>
+                                                    </form>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
 
                                 </tbody>
                             </table>

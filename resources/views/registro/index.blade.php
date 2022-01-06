@@ -11,37 +11,36 @@
                                 Regitros
                             </div>
                             <div class="col-6" style="display:flex;align-items: center;justify-content:right">
-                                <div class="float-right">
-                                    <a href="{{ route('registro.create') }}" class="btn btn-primary mb-3">Novo
-                                        registro</a>
-                                    <li class="nav-item dropdown ano">
-                                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                            Ano
-                                        </a>
-
-                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="{{ route('registro.index') }}">Todos</a>
-                                            @for ($i = 2020; $i <= date('Y'); $i++)
-                                                <a class="dropdown-item"
-                                                    href="{{ route('registro.ano', ['ano' => $i]) }}">
-                                                    {{ $i }}
-                                                </a>
-                                            @endfor
-                                        </div>
-                                    </li>
-                                    @if ($objeto->saldo > 0)
-                                        <p class="valor positivo">Saldo: {{ $objeto->saldo }}</p>
-                                    @elseif($objeto->saldo==0)
-                                        <p>Saldo: R$ {{ $objeto->saldo }}</p>
-                                    @else
-                                        <p class="valor negativo">Saldo: R$ {{ $objeto->saldo }}</p>
-                                    @endif
-                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="card-body">
+                        <div style="display:flex;flex-direction:column;align-items:flex-end" class="float-right">
+                            <a href="{{ route('registro.create') }}" class="btn btn-primary mb-3">Novo
+                                registro</a>
+                            <li class="nav-item dropdown ano">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Ano
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="ano-select dropdown-item" href="{{ route('registro.index') }}">Todos</a>
+                                    @for ($i = 2020; $i <= date('Y'); $i++)
+                                        <a class="dropdown-item" href="{{ route('registro.ano', ['ano' => $i]) }}">
+                                            {{ $i }}
+                                        </a>
+                                    @endfor
+                                </div>
+                            </li>
+                            @if ($objeto->saldo > 0)
+                                <p class="valor positivo">Saldo: {{ $objeto->saldo }}</p>
+                            @elseif($objeto->saldo==0)
+                                <p>Saldo: R$ {{ $objeto->saldo }}</p>
+                            @else
+                                <p class="valor negativo">Saldo: R$ {{ $objeto->saldo }}</p>
+                            @endif
+                        </div>
                         <div class="table">
                             <table class="table">
                                 <thead>

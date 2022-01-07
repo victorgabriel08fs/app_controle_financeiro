@@ -17,8 +17,6 @@ Route::get('/', function () {
     return view('index');
 })->name('index');
 
-Route::post('/cep', 'EnderecoController@preencherEndereco')->name('endereco.preencher');
-Route::get('/cep/create/{cep}', 'EnderecoController@createCep')->name('endereco.cep');
 
 Route::get('/acesso-negado', function () {
     return view('acesso-negado');
@@ -59,6 +57,8 @@ Route::middleware('auth')->group(function () {
         });
     });
     Route::resource('endereco', 'EnderecoController');
+    Route::post('/cep', 'EnderecoController@preencherEndereco')->name('endereco.preencher');
+    Route::get('/cep/create/{cep}', 'EnderecoController@createCep')->name('endereco.cep');
     Route::resource('user_dados', 'UserDadosController');
 });
 

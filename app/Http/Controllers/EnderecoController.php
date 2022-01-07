@@ -31,7 +31,11 @@ class EnderecoController extends Controller
 
     public function createCep($cep)
     {
-        $response = Http::get('http://viacep.com.br/ws/' . $cep . '/json/');
+        $response = Http::withOptions([
+            'proxy' => [
+                'http' => 'http://victor.silva:Alfl1605:)@proxy.campus.unimontes.int:3128'
+            ]
+        ])->get('http://viacep.com.br/ws/' . $cep . '/json/');
         $endereco = (json_decode($response));
         if (isset($endereco->erro)) {
             return view('cadastro.endereco.create', ['status' => 0]);

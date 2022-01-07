@@ -17,10 +17,8 @@ Route::get('/', function () {
     return view('index');
 })->name('index');
 
-Route::get('/teste', function () {
-    $response = Http::get('http://viacep.com.br/ws/39402266/json/');
-    dd($response);
-});
+Route::post('/cep', 'EnderecoController@preencherEndereco')->name('endereco.preencher');
+Route::get('/cep/create/{cep}', 'EnderecoController@createCep')->name('endereco.cep');
 
 Route::get('/acesso-negado', function () {
     return view('acesso-negado');

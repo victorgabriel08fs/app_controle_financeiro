@@ -8,9 +8,17 @@
                     <div class="card-header">Preencha com seus dados</div>
 
                     <div class="card-body">
-                        @component('cadastro.endereco._components.formulario')
-
-                        @endcomponent
+                        @if (isset($endereco))
+                            @component('cadastro.endereco._components.formulario', ['endereco' => $endereco, 'status' =>
+                                $status])
+                            @endcomponent
+                        @elseif(isset($status))
+                            @component('cadastro.endereco._components.formulario', ['status' => $status])
+                            @endcomponent
+                        @else
+                            @component('cadastro.endereco._components.formulario')
+                            @endcomponent
+                        @endif
                     </div>
                 </div>
             </div>

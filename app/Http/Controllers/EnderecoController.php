@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Endereco;
+use App\Models\Objeto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class EnderecoController extends Controller
 {
@@ -25,6 +27,17 @@ class EnderecoController extends Controller
     public function create()
     {
         return view('cadastro.endereco.create');
+    }
+
+    public function createCep($cep)
+    {
+        $response = Http::get('http://viacep.com.br/ws/' . $cep . '/json/');
+        $endereco = (json_decode($response));
+        if (isset($endereco->erro)) {
+            return view('cadastro.endereco.create', ['status' => 0]);
+        } else {
+            return view('cadastro.endereco.create', ['endereco' => $endereco, 'status' => 1]);
+        }
     }
 
     /**
@@ -82,5 +95,10 @@ class EnderecoController extends Controller
     public function destroy($id)
     {
         return redirect()->route('acesso-negado');
+    }
+
+    public function preencherEndereco(Request $request)
+    {
+        return redirect()->route('endereco.cep', ['cep' => $request->cep]);
     }
 }

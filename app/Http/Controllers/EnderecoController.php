@@ -31,9 +31,14 @@ class EnderecoController extends Controller
 
     public function createCep($cep)
     {
+        if (config('app.env', 'Laravel') == 'local') {
+            $proxy = 'http://victor.silva:Alfl1605:)@proxy.campus.unimontes.int:3128';
+        } else {
+            $proxy = '';
+        }
         $response = Http::withOptions([
             'proxy' => [
-                'http' => 'http://victor.silva:Alfl1605:)@proxy.campus.unimontes.int:3128'
+                'http' => $proxy
             ]
         ])->get('http://viacep.com.br/ws/' . $cep . '/json/');
         $endereco = (json_decode($response));

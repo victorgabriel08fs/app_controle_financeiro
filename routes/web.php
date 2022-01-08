@@ -22,12 +22,12 @@ Route::get('/acesso-negado', function () {
     return view('acesso-negado');
 })->name('acesso-negado');
 
-Auth::routes();
-// Auth::routes(['verify' => true]);
+// Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::middleware('auth')->group(function () {
 
-    Route::middleware('cadastro.completo')->group(function () {
+    Route::middleware('cadastro.completo')->middleware('verified')->group(function () {
         Route::prefix('admin')->group(function () {
             Route::post('/user/revive/{user_id}', 'UserController@revive')->name('user.revive');
             Route::resource('user', 'UserController');

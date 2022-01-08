@@ -27,7 +27,7 @@ Auth::routes();
 
 Route::middleware('auth')->group(function () {
 
-    Route::middleware('cadastro.completo')->middleware('verified')->group(function () {
+    Route::middleware('cadastro.completo')->group(function () {
         Route::prefix('admin')->group(function () {
             Route::post('/user/revive/{user_id}', 'UserController@revive')->name('user.revive');
             Route::resource('user', 'UserController');

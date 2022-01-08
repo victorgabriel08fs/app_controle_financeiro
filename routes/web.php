@@ -22,8 +22,8 @@ Route::get('/acesso-negado', function () {
     return view('acesso-negado');
 })->name('acesso-negado');
 
-// Auth::routes();
-Auth::routes(['verify' => true]);
+Auth::routes();
+// Auth::routes(['verify' => true]);
 
 Route::middleware('auth')->group(function () {
 

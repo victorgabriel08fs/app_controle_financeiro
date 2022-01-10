@@ -1,5 +1,6 @@
 @extends('layouts.app')
-
+{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script> --}}
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -31,7 +32,8 @@
 
                                 <div class="col-md-6">
                                     <input id="cpf" type="text" class="form-control @error('cpf') is-invalid @enderror"
-                                        name="cpf" value="{{ old('cpf') }}" required autocomplete="cpf" autofocus>
+                                        maxlength="11" name="cpf" value="{{ old('cpf') }}" required autocomplete="cpf"
+                                        autofocus>
 
                                     @error('cpf')
                                         <span class="invalid-feedback" role="alert">
@@ -97,4 +99,19 @@
             </div>
         </div>
     </div>
+    {{-- <script>
+        var options = {
+            onKeyPress: function(cpf, ev, el, op) {
+                var mask = '000.000.000-00';
+                $('#cpf').mask(mask, op);
+            }
+        }
+        $('#cpf').mask(
+            '000.000.000-00', options);
+        var a = {
+            onKeyPress: function() {
+                console.log($('#cpf').value);
+            }
+        }
+    </script> --}}
 @endsection

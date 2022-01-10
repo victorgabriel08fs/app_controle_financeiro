@@ -21,11 +21,12 @@ class Kernel extends ConsoleKernel
             foreach ($users as $user) {
                 foreach ($user->contas as $conta) {
                     if ($conta->tipo == 0) {
-                        $conta->saldo *= 0.5;
+                        $conta->saldo=$conta->saldo+1;
+                        $conta->save();
                     }
                 }
             }
-        })->hourly();
+        })->everyTwoMinutes();
     }
 
     /**

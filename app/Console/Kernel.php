@@ -17,19 +17,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->call(function () {
-        //     $users = User::all();
-        //     $taxa = Taxa::all();
-        //     $taxa = $taxa->last();
-        //     foreach ($users as $user) {
-        //         foreach ($user->contas as $conta) {
-        //             if ($conta->tipo == 0) {
-        //                 $conta->saldo = $conta->saldo + ($taxa->taxa * $conta->saldo);
-        //                 $conta->save();
-        //             }
-        //         }
-        //     }
-        // })->everyTenMinutes();
+        $schedule->command('rendimento')->everyMinute();
     }
 
     /**

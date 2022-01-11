@@ -20,6 +20,7 @@
 </div>
 <label class="form-label">Estado Civil</label>
 <select class="form-select" name="estado_civil">
+    <option value="-1">Selecione seu estado civil</option>
     <option value=0 {{ isset($user_dados->id) && $user_dados->estado_civil == 0 ? 'selected' : '' }}>
         Solteiro (a)</option>
     <option value=1 {{ isset($user_dados->id) && $user_dados->estado_civil == 1 ? 'selected' : '' }}>
@@ -33,10 +34,11 @@
 <br>
 <label class="form-label">Sexo</label>
 <select class="form-select" name="sexo">
+    <option value="-1">Selecione seu sexo</option>
     <option value=0 {{ isset($user_dados->id) && $user_dados->sexo == 0 ? 'selected' : '' }}>
-        Masculino (a)</option>
+        Masculino</option>
     <option value=1 {{ isset($user_dados->id) && $user_dados->sexo == 1 ? 'selected' : '' }}>
-        Feminino (a)</option>
+        Feminino</option>
 </select>
 {{ $errors->has('sexo') ? $errors->first('sexo') : '' }}
 <br>

@@ -84,6 +84,20 @@ class ContaController extends Controller
      */
     public function store(Request $request)
     {
+        $regras = [
+            'conta' => 'required|numeric|digits:5',
+            'digito' => 'required|numeric|digits:2',
+            'user_id' => 'required|exists:users,id',
+            'tipo' => 'required|boolean'
+        ];
+        $feedbacks = [
+            'required'=>'O campo :attribute é obrigatório',
+            'numeric'=>'O campo :attribute só aceita números',
+            'exists'=>'Não foi possível encontrar',
+            'tipo'=>'Tipo não identificado',
+        ];
+
+
         $userContas = Conta::where('user_id', $request->user_id)->get();
         $corrente = 0;
         $poupanca = 0;
@@ -94,6 +108,7 @@ class ContaController extends Controller
                 $corrente++;
         }
         if (($poupanca == 0 && $request->tipo == 0) || ($corrente == 0 && $request->tipo == 1)) {
+            $request->validate($regras, $feedbacks);
             Conta::create($request->all());
             $message = 2;
         } else {

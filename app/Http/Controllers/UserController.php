@@ -74,8 +74,6 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $regras = [''];
-        $feedbacks = [''];
         $user->update($request->all());
         return redirect()->route('user.index');
     }

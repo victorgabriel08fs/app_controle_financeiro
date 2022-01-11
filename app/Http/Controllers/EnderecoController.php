@@ -57,6 +57,25 @@ class EnderecoController extends Controller
      */
     public function store(Request $request)
     {
+        $regras = [
+            'cep' => 'required|string|max:9',
+            'rua' => 'required|string',
+            'numero' => 'required|numeric',
+            'complemento' => 'required|string',
+            'bairro' => 'required|string',
+            'cidade' => 'required|string',
+            'estado' => 'required|string',
+            'user_dados_id' => 'required|exists:user_dados,id',
+        ];
+        $feedbacks = [
+            'required' => 'O campo :attribute é obrigatório',
+            'numeric' => 'O campo :attribute só aceita números',
+            'exists' => 'Não foi possível encontrar',
+            'max' => 'cep inválido'
+        ];
+
+
+        $request->validate($regras, $feedbacks);
         Endereco::create($request->all());
         return redirect()->route('home');
     }

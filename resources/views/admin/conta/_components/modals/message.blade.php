@@ -41,6 +41,6 @@
         }
         setTimeout(() => {
             document.getElementById("open-modal").click();
-        }, 3000);
+        }, 2000);
     </script>
 @endif

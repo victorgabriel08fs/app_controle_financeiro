@@ -35,7 +35,25 @@ class UserDadosController extends Controller
      */
     public function store(Request $request)
     {
-        UserDado::create($request->all());
+        $regras = [
+            'telefone' => 'required|numeric|digits_between:10,12',
+            'data_nasc' => 'required|date',
+            'estado_civil' => 'required|numeric|digits:1|min:0',
+            'sexo' => 'required|numeric|digits:1|min:0',
+            'user_id' => 'required|exists:users,id',
+        ];
+        $feedbacks = [
+            'required' => 'O campo :attribute é obrigatório',
+            'digits_between' => 'Insira um :attribute válido',
+            'digits' => 'Insira um :attribute válido',
+            'numeric' => 'O campo :attribute só aceita números',
+            'exists' => 'Não foi possível encontrar',
+            'date' => 'Insira uma data válida'
+        ];
+
+
+        $request->validate($regras, $feedbacks);
+        $user_dado = UserDado::create($request->all());
         return redirect()->route('endereco.create');
     }
 

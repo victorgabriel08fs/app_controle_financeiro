@@ -83,8 +83,22 @@ class RegistroController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate($this->registro->regras, $this->registro->feedbacks);
+        $regras = [
+            'tipo' => 'required|boolean',
+            'valor' => 'required|numeric',
+            'descricao' => 'string',
+            'data' => 'required|date',
+            'user_id' => 'required|exists:users,id',
+        ];
+        $feedbacks = [
+            'required' => 'O campo :attribute é obrigatório',
+            'numeric' => 'O campo :attribute só aceita números',
+            'exists' => 'Não foi possível encontrar',
+            'date' => 'Insira uma data válida'
+        ];
 
+
+        $request->validate($regras, $feedbacks);
         Registro::create($request->all());
         return redirect()->route('registro.index');
     }

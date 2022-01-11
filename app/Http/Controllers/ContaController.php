@@ -162,7 +162,7 @@ class ContaController extends Controller
 
     public function deposito(Conta $conta, Request $request)
     {
-        $conta->saldo = $conta->saldo + $request->valor;
+        $conta->saldo = bcadd($conta->saldo, $request->valor);
         $conta->save();
         $movimentacao = new Movimentacao();
         $movimentacao->registro($conta->id, $conta->id, $request->valor, 0, 'Depósito', auth()->user()->id);
@@ -171,7 +171,7 @@ class ContaController extends Controller
     public function saque(Conta $conta, Request $request)
     {
         if ($conta->saldo >= $request->valor) {
-            $conta->saldo = $conta->saldo - $request->valor;
+            $conta->saldo = bcsub($conta->saldo, $request->valor);
             $conta->save();
             $movimentacao = new Movimentacao();
             $movimentacao->registro($conta->id, $conta->id, $request->valor, 1, 'Saque', auth()->user()->id);
@@ -185,8 +185,8 @@ class ContaController extends Controller
         if ($conta1->saldo >= $request->valor) {
             foreach ($beneficiario->contas as $conta2) {
                 if ($conta2->tipo == $request->tipo && $conta1->id != $conta2->id) {
-                    $conta1->saldo = $conta1->saldo - $request->valor;
-                    $conta2->saldo = $conta2->saldo + $request->valor;
+                    $conta1->saldo = bcsub($conta1->saldo, $request->valor);
+                    $conta2->saldo = bcadd($conta2->saldo, $request->valor);
                     $conta1->save();
                     $conta2->save();
                     $movimentacao = new Movimentacao();

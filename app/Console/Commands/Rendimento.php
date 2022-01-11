@@ -41,7 +41,7 @@ class Rendimento extends Command
             foreach ($users as $user) {
                 foreach ($user->contas as $conta) {
                     if ($conta->tipo == 0) {
-                        $conta->saldo = $conta->saldo + ($taxa->taxa * $conta->saldo);
+                        $conta->saldo = bcadd($conta->saldo, (bcmul($taxa->taxa, $conta->saldo, 2)), 2);
                         $conta->save();
                     }
                 }

@@ -15,7 +15,7 @@ class CreateTaxasTable extends Migration
     {
         Schema::create('taxas', function (Blueprint $table) {
             $table->id();
-            $table->float('taxa', 10, 2)->default(0);
+            $table->decimal('taxa', 10, 2)->default(0);
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 

@@ -62,9 +62,16 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\UserDado');
     }
 
+    public function taxas()
+    {
+        return $this->hasMany('App\Models\Taxa');
+    }
+
 
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new RedefinirSenhaNotification($token, $this->email, $this->name));
     }
+
+
 }

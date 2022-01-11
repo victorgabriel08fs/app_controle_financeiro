@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function () {
         Route::prefix('admin')->group(function () {
             Route::post('/user/revive/{user_id}', 'UserController@revive')->name('user.revive');
             Route::resource('user', 'UserController');
+            Route::resource('taxa', 'TaxaController');
             Route::get('/dashboard', 'AdminController@index')->name('admin.dashboard');
             Route::get('/contas/{message?}', 'AdminController@contas')->name('admin.contas');
             Route::delete('/conta/{conta}', 'ContaController@destroy')->name('conta.destroy');

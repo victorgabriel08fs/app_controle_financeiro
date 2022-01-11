@@ -50,6 +50,9 @@
                                 <a class="dropdown-item" href="{{ route('admin.contas') }}">
                                     Contas
                                 </a>
+                                <a class="dropdown-item" href="{{ route('taxa.index') }}">
+                                    Taxas
+                                </a>
                             </div>
                         </li>
                     @endif

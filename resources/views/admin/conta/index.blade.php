@@ -26,7 +26,7 @@
                         <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modalCpf">
                             Nova Conta
                         </button>
-                        
+
                         <div class="table">
                             <table class="table">
                                 <thead>
@@ -50,8 +50,9 @@
                                             <td>{{ $conta->tipo ? 'Corrente' : 'Poupança' }}</td>
                                             @if ($conta->saldo > 0)
                                                 <td class="valor positivo">
-                                                @elseif($conta->saldo < 0) <td class="valor negativo">
-                                                    @else
+                                                @elseif($conta->saldo < 0)
+                                                <td class="valor negativo">
+                                                @else
                                                 <td>
                                             @endif
                                             R$ {{ number_format($conta->saldo, 2) }}</td>
@@ -82,7 +83,33 @@
                                 </tbody>
                             </table>
                         </div>
-
+                        <a href="{{ url()->previous() }}" class="btn btn-primary float-right">Voltar</a>
+                        <br>
+                        <br>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ $contas->previousPageUrl() }}"
+                                        aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                </li>
+                                @for ($i = 1; $i <= $contas->lastPage(); $i++)
+                                    <li class="page-item {{ $contas->currentPage() == $i ? 'active' : '' }}">
+                                        <a class="page-link"
+                                            href="{{ $contas->url($i) }}">{{ $i }}</a>
+                                    </li>
+                                @endfor
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ $contas->nextPageUrl() }}"
+                                        aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>

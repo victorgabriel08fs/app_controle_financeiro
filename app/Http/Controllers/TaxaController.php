@@ -14,7 +14,7 @@ class TaxaController extends Controller
      */
     public function index()
     {
-        $taxas = Taxa::orderBy('created_at','desc')->get();
+        $taxas = Taxa::orderBy('created_at','desc')->paginate(10);
         return view('admin.taxa.index', ['taxas' => $taxas]);
     }
 

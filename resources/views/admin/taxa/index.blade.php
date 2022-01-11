@@ -34,7 +34,7 @@
 
                                         <tr>
                                             <td>{{ bcmul($taxa->taxa, 100) }}%</td>
-                                            <td>{{ strtok($taxa->user->name," ") }}</td>
+                                            <td>{{ strtok($taxa->user->name, ' ') }}</td>
                                             <td>{{ date('d/m/Y', strtotime($taxa->created_at)) }}</td>
                                         </tr>
                                     @endforeach
@@ -42,7 +42,31 @@
                                 </tbody>
                             </table>
                         </div>
-
+                        <a href="{{ url()->previous() }}" class="btn btn-primary float-right">Voltar</a>
+                        <br>
+                        <br>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ $taxas->previousPageUrl() }}"
+                                        aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                </li>
+                                @for ($i = 1; $i <= $taxas->lastPage(); $i++)
+                                    <li class="page-item {{ $taxas->currentPage() == $i ? 'active' : '' }}">
+                                        <a class="page-link" href="{{ $taxas->url($i) }}">{{ $i }}</a>
+                                    </li>
+                                @endfor
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ $taxas->nextPageUrl() }}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>

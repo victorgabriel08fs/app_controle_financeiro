@@ -213,4 +213,9 @@ class ContaController extends Controller
         }
         return redirect()->route('conta.index');
     }
+
+    public function solicita(Request $request)
+    {
+        dd($request->all());
+    }
 }

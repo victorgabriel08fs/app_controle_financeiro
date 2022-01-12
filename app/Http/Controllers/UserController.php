@@ -87,10 +87,10 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         if (auth()->user()->id != $user->id) {
-            // if ($user->contas) {
-            //     foreach ($user->contas as $conta)
-            //         $conta->delete();
-            // }
+            if ($user->contas) {
+                foreach ($user->contas as $conta)
+                    $conta->delete();
+            }
             $user->delete();
         }
         return redirect()->route('user.index');

@@ -91,10 +91,10 @@ class ContaController extends Controller
             'tipo' => 'required|boolean'
         ];
         $feedbacks = [
-            'required'=>'O campo :attribute é obrigatório',
-            'numeric'=>'O campo :attribute só aceita números',
-            'exists'=>'Não foi possível encontrar',
-            'tipo'=>'Tipo não identificado',
+            'required' => 'O campo :attribute é obrigatório',
+            'numeric' => 'O campo :attribute só aceita números',
+            'exists' => 'Não foi possível encontrar',
+            'tipo' => 'Tipo não identificado',
         ];
 
 
@@ -171,7 +171,8 @@ class ContaController extends Controller
         foreach ($conta_to_revive as $key => $value) {
             $conta->$key = $value;
         }
-        $conta->restore();
+        if (!$conta->user->deleted_at)
+            $conta->restore();
         return redirect()->route('admin.contas');
     }
 

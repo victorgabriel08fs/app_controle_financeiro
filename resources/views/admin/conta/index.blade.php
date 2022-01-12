@@ -45,6 +45,11 @@
                                         <tr>
                                             <td>@php
                                                 echo formatCpf($conta->user->cpf);
+                                                if ($conta->user->deleted_at) {
+                                                    echo ' (Inativo)';
+                                                } else {
+                                                    echo ' (Ativo)';
+                                                }
                                             @endphp</td>
                                             <td>{{ $conta->conta . '-' . $conta->digito }}</td>
                                             <td>{{ $conta->tipo ? 'Corrente' : 'Poupança' }}</td>
@@ -97,13 +102,11 @@
                                 </li>
                                 @for ($i = 1; $i <= $contas->lastPage(); $i++)
                                     <li class="page-item {{ $contas->currentPage() == $i ? 'active' : '' }}">
-                                        <a class="page-link"
-                                            href="{{ $contas->url($i) }}">{{ $i }}</a>
+                                        <a class="page-link" href="{{ $contas->url($i) }}">{{ $i }}</a>
                                     </li>
                                 @endfor
                                 <li class="page-item">
-                                    <a class="page-link" href="{{ $contas->nextPageUrl() }}"
-                                        aria-label="Next">
+                                    <a class="page-link" href="{{ $contas->nextPageUrl() }}" aria-label="Next">
                                         <span aria-hidden="true">&raquo;</span>
                                         <span class="sr-only">Next</span>
                                     </a>

@@ -101,10 +101,10 @@ class UserController extends Controller
         $user = User::withTrashed()->find($user_id);
 
         $user->restore();
-        // if ($user->contas) {
-        //     foreach ($user->contas as $conta)
-        //         $conta->restore();
-        // }
+        if ($user->contas) {
+            foreach ($user->contas as $conta)
+                $conta->restore();
+        }
         return redirect()->route('user.index');
     }
 }

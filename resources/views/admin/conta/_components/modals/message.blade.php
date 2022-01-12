@@ -11,10 +11,10 @@
                     <div id='texto' class="message">
                         @if ($message == 0)
                             <h4 class="negativo">O usuário já possui os dois tipos de conta!</h4>
-                            @elseif($message==1)
-                                <h4 class="negativo">O usuário já possui uma conta deste tipo!</h4>
-                                @else
-                                    <h4 class="positivo">Conta criada com sucesso!</h4>
+                        @elseif($message == 1)
+                            <h4 class="negativo">O usuário já possui uma conta deste tipo!</h4>
+                        @else
+                            <h4 class="positivo">Conta criada com sucesso!</h4>
                         @endif
                     </div>
                 @endif

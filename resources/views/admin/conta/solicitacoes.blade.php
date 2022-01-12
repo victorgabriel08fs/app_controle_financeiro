@@ -2,6 +2,9 @@
 
 @section('content')
 
+    @component('_components.functions.formatCpf')
+
+    @endcomponent
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -35,15 +38,19 @@
                                             <td>{{ $solicitacao->conta ? 'Corrente' : 'Poupança' }}</td>
                                             <td>{{ $solicitacao->tipo ? 'Criação' : 'Desativação' }}</td>
                                             <td>
-                                                <form id="form_{{ $conta->id }}" method="POST"
+                                                <form id="form_{{ $solicitacao->id }}" method="POST"
                                                     action="{{ route('solicitacao.update', ['solicitacao' => $solicitacao]) }}">
                                                     @csrf
                                                     @method('PUT')
-                                                    <select
+                                                    <select {{ $solicitacao->status ? 'disabled' : '' }}
                                                         onchange="document.getElementById('form_{{ $solicitacao->id }}').submit()"
                                                         class="form-select" name="status">
-                                                        <option value=0>Pendente</option>
-                                                        <option value=1>Resolvido</option>
+                                                        <option {{ $solicitacao->status ? '' : 'selected' }} value=0>
+                                                            Pendente
+                                                        </option>
+                                                        <option {{ $solicitacao->status ? 'selected' : '' }}
+                                                            value=1>Resolvido
+                                                        </option>
                                                     </select>
                                                 </form>
                                             </td>
@@ -59,19 +66,21 @@
                         <nav aria-label="Page navigation example">
                             <ul class="pagination">
                                 <li class="page-item">
-                                    <a class="page-link" href="{{ $contas->previousPageUrl() }}"
+                                    <a class="page-link" href="{{ $solicitacoes->previousPageUrl() }}"
                                         aria-label="Previous">
                                         <span aria-hidden="true">&laquo;</span>
                                         <span class="sr-only">Previous</span>
                                     </a>
                                 </li>
-                                @for ($i = 1; $i <= $contas->lastPage(); $i++)
-                                    <li class="page-item {{ $contas->currentPage() == $i ? 'active' : '' }}">
-                                        <a class="page-link" href="{{ $contas->url($i) }}">{{ $i }}</a>
+                                @for ($i = 1; $i <= $solicitacoes->lastPage(); $i++)
+                                    <li class="page-item {{ $solicitacoes->currentPage() == $i ? 'active' : '' }}">
+                                        <a class="page-link"
+                                            href="{{ $solicitacoes->url($i) }}">{{ $i }}</a>
                                     </li>
                                 @endfor
                                 <li class="page-item">
-                                    <a class="page-link" href="{{ $contas->nextPageUrl() }}" aria-label="Next">
+                                    <a class="page-link" href="{{ $solicitacoes->nextPageUrl() }}"
+                                        aria-label="Next">
                                         <span aria-hidden="true">&raquo;</span>
                                         <span class="sr-only">Next</span>
                                     </a>

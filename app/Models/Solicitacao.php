@@ -11,4 +11,9 @@ class Solicitacao extends Model
     protected $table = 'solicitacoes';
 
     protected $fillable = ['user_id', 'conta', 'tipo', 'status'];
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User')->withTrashed();
+    }
 }

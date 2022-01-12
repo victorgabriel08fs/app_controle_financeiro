@@ -14,7 +14,7 @@ class SolicitacaoController extends Controller
      */
     public function index()
     {
-        $solicitacoes = Solicitacao::paginate(10);
+        $solicitacoes = Solicitacao::orderBy('status')->paginate(10);
         return view('admin.conta.solicitacoes', ['solicitacoes' => $solicitacoes]);
     }
 
@@ -36,7 +36,8 @@ class SolicitacaoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Solicitacao::create($request->all());
+        return redirect()->route('conta.index');
     }
 
     /**
@@ -70,7 +71,10 @@ class SolicitacaoController extends Controller
      */
     public function update(Request $request, Solicitacao $solicitacao)
     {
-        dd($request->all());
+        $solicitacao->status = $request->status;
+        $solicitacao->save();
+
+        return redirect()->route('solicitacao.index');
     }
 
     /**

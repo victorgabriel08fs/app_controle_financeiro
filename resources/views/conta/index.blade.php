@@ -13,7 +13,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        @if ($contas->first())
+                        @if ($contas->first() || $contas->first() == $contas->last())
                             <div class="table">
                                 <table class="table">
                                     <thead>
@@ -83,7 +83,8 @@
                                     </tbody>
                                 </table>
                             </div>
-                        @else
+                        @endif
+                        @if (!$contas->first() || $contas->first() == $contas->last())
                             <button type="button" class="btn btn-primary" data-toggle="modal"
                                 data-target="#modalSolicita">Solicitar nova conta</button>
                             @component('conta._components.modals.solicita_conta', ['user' => auth()->user()])

@@ -40,6 +40,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/conta', 'ContaController@store')->name('conta.store');
             Route::post('/conta/revive/{conta_id}', 'ContaController@revive')->name('conta.revive');
             Route::put('/solicitacao/{solicitacao}', 'SolicitacaoController@update')->name('solicitacao.update');
+            Route::get('/solicitacao', 'SolicitacaoController@index')->name('solicitacao.index');
 
         });
         Route::prefix('registros')->group(function () {

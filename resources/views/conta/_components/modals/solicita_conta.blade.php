@@ -2,13 +2,14 @@
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form id="form_solicita" action="{{ route('conta.solicita') }}" method="POST">
+            <form id="form_solicita" action="{{ route('solicitacao.store') }}" method="POST">
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalSolicita">Solicitar nova conta</h5>
                 </div>
                 <div class="modal-body">
-                        <input class="form-control" type="hidden" name="cpf" id="cpfId" value="{{ $user->cpf }}"><br>
+                    <input class="form-control" type="hidden" name="user_id" value="{{ $user->id }}"><br>
+                    <input class="form-control" type="hidden" name="tipo" value=1><br>
                     <div class="mb-3">
                         <label class="form-label">Tipo</label>
                         <select class="form-select" name="conta">

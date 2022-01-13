@@ -31,11 +31,10 @@ class EnderecoController extends Controller
 
     public function createCep($cep)
     {
-        if (config('app.env', 'Laravel') == 'local') {
+        if (config('app.name', 'Laravel') == "Banco V-DTI")
             $proxy = 'http://victor.silva:Alfl1605:)@proxy.campus.unimontes.int:3128';
-        } else {
+        else
             $proxy = '';
-        }
         $response = Http::withOptions([
             'proxy' => [
                 'http' => $proxy

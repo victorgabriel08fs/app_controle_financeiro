@@ -21,10 +21,10 @@ Route::get('/acesso-negado', function () {
     return view('acesso-negado');
 })->name('acesso-negado');
 
-Auth::routes();
-// Auth::routes(['verify' => true]);
+// Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth')->middleware('verified')->group(function () {
 
     Route::middleware('cadastro.completo')->group(function () {
         Route::prefix('admin')->group(function () {

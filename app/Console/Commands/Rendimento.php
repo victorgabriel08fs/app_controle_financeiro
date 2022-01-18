@@ -43,6 +43,7 @@ class Rendimento extends Command
                     if ($conta->tipo == 0) {
                         $conta->saldo = bcadd($conta->saldo, (bcmul($taxa->taxa, $conta->saldo, 2)), 2);
                         $conta->save();
+                        echo ' ------ Rendimento gerado ------ ';
                     }
                 }
             }

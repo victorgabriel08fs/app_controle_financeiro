@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use App\Models\User;
 use Illuminate\Console\Command;
 
-class Rendimento extends Command
+class Admin extends Command
 {
     protected $signature = 'admin';
 

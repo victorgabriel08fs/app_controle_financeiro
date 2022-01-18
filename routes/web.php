@@ -62,8 +62,6 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::resource('endereco', 'EnderecoController');
-    Route::post('/cep', 'EnderecoController@preencherEndereco')->name('endereco.preencher');
-    Route::get('/cep/create/{cep}', 'EnderecoController@createCep')->name('endereco.cep');
     Route::resource('user_dados', 'UserDadosController');
 });
 

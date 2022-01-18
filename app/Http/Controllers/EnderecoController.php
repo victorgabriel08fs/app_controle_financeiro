@@ -29,24 +29,6 @@ class EnderecoController extends Controller
         return view('cadastro.endereco.create');
     }
 
-    public function createCep($cep)
-    {
-        if (config('app.name', 'Laravel') == "Banco V-DTI")
-            $proxy = 'http://victor.silva:Alfl1605:)@proxy.campus.unimontes.int:3128';
-        else
-            $proxy = '';
-        $response = Http::withOptions([
-            'proxy' => [
-                'http' => $proxy
-            ]
-        ])->get('http://viacep.com.br/ws/' . $cep . '/json/');
-        $endereco = (json_decode($response));
-        if (isset($endereco->erro)) {
-            return view('cadastro.endereco.create', ['status' => 0]);
-        } else {
-            return view('cadastro.endereco.create', ['endereco' => $endereco, 'status' => 1]);
-        }
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -60,7 +42,7 @@ class EnderecoController extends Controller
             'cep' => 'required|string|max:9',
             'rua' => 'required|string',
             'numero' => 'required|numeric',
-            'complemento' => 'required|string',
+            'complemento' => 'nullable|string',
             'bairro' => 'required|string',
             'cidade' => 'required|string',
             'estado' => 'required|string',
@@ -124,8 +106,5 @@ class EnderecoController extends Controller
         return redirect()->route('acesso-negado');
     }
 
-    public function preencherEndereco(Request $request)
-    {
-        return redirect()->route('endereco.cep', ['cep' => $request->cep]);
-    }
+    
 }

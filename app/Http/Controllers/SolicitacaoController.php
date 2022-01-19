@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Solicitacao;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SolicitacaoController extends Controller
@@ -72,9 +73,21 @@ class SolicitacaoController extends Controller
     public function update(Request $request, Solicitacao $solicitacao)
     {
         $solicitacao->status = $request->status;
+        $solicitacao->admin_id = auth()->user()->id;
         $solicitacao->save();
 
         return redirect()->route('solicitacao.index');
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $user = User::where('cpf', $request->cpf)->get()->first();
+        if ($user) {
+            Solicitacao::create([
+                'tipo' => '3',
+                'user_id' => $user->id
+            ]);
+        }
     }
 
     /**

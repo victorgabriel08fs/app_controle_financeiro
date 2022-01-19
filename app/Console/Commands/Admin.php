@@ -38,6 +38,8 @@ class Admin extends Command
             $user->is_admin = true;
             $user->save();
             echo ' ------ Usuário administrador gerado ------ ';
+        }else{
+            echo ' ------ Usuário administrador não foi criado ainda ------ ';
         }
 
         return Command::SUCCESS;

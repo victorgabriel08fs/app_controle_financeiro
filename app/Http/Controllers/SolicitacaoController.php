@@ -16,7 +16,7 @@ class SolicitacaoController extends Controller
     public function index()
     {
         $solicitacoes = Solicitacao::orderBy('status')->paginate(10);
-        return view('admin.conta.solicitacoes', ['solicitacoes' => $solicitacoes]);
+        return view('admin.solicitacao.index', ['solicitacoes' => $solicitacoes]);
     }
 
     /**
@@ -38,9 +38,19 @@ class SolicitacaoController extends Controller
     public function store(Request $request)
     {
         $solicitacoes = Solicitacao::where('user_id', auth()->user()->id)->where('status', 0)->get();
-        if($solicitacoes->count()<2){
-        Solicitacao::create($request->all());
-        return redirect()->route('conta.index')->withErrors(['success' => 'Solicitação enviada!']);
+        $criacao = 0;
+        $reset = 0;
+        foreach ($solicitacoes as $solicitacao) {
+            if ($solicitacao->tipo == 1 && $solicitacao->status == 0) {
+                $criacao++;
+            }
+            if ($solicitacao->tipo == 3 && $solicitacao->status == 0) {
+                $reset++;
+            }
+        }
+        if (($criacao < 2 && $request->tipo == 1) || ($reset < 1 && $request->tipo == 3)) {
+            Solicitacao::create($request->all());
+            return redirect()->route('conta.index')->withErrors(['success' => 'Solicitação enviada!']);
         }
         return redirect()->route('conta.index')->withErrors(['error' => 'Falha!']);
     }

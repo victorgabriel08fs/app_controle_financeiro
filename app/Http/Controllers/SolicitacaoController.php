@@ -37,8 +37,12 @@ class SolicitacaoController extends Controller
      */
     public function store(Request $request)
     {
+        $solicitacoes = Solicitacao::where('user_id', auth()->user()->id)->where('status', 0)->get();
+        if($solicitacoes->count()<2){
         Solicitacao::create($request->all());
-        return redirect()->route('conta.index');
+        return redirect()->route('conta.index')->withErrors(['success' => 'Solicitação enviada!']);
+        }
+        return redirect()->route('conta.index')->withErrors(['error' => 'Falha!']);
     }
 
     /**
@@ -76,7 +80,7 @@ class SolicitacaoController extends Controller
         $solicitacao->admin_id = auth()->user()->id;
         $solicitacao->save();
 
-        return redirect()->route('solicitacao.index');
+        return redirect()->route('solicitacao.index')->withErrors(['success' => 'Solicitação concluída!']);
     }
 
     public function resetPassword(Request $request)

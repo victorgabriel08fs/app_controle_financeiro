@@ -92,8 +92,9 @@ class UserController extends Controller
                     $conta->delete();
             }
             $user->delete();
+            return redirect()->route('user.index')->withErrors(['success' => 'Usuário desativado!']);
         }
-        return redirect()->route('user.index');
+        return redirect()->route('user.index')->withErrors(['error' => 'Falha!']);
     }
 
     public function revive($user_id)
@@ -104,7 +105,8 @@ class UserController extends Controller
         if ($user->contas) {
             foreach ($user->contas as $conta)
                 $conta->restore();
+                return redirect()->route('user.index')->withErrors(['success' => 'Usuário reativado!']);
         }
-        return redirect()->route('user.index');
+        return redirect()->route('user.index')->withErrors(['error' => 'Falha!']);
     }
 }

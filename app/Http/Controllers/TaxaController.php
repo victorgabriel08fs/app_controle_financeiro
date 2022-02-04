@@ -48,7 +48,7 @@ class TaxaController extends Controller
         $request->validate($regras, $feedbacks);
         Taxa::create($request->all());
 
-        return redirect()->route('taxa.index');
+        return redirect()->route('taxa.index')->withErrors(['success' => 'Nova taxa em vigor!']);
     }
 
     /**

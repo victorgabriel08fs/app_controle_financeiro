@@ -24,6 +24,9 @@ Route::get('/acesso-negado', function () {
 Auth::routes();
 // Auth::routes(['verify' => true]);
 
+Route::get('/resetar/senha', 'SolicitacaoController@reset')->name('solicitacao.reset');
+Route::post('/resetar/senha', 'SolicitacaoController@resetPassword')->name('solicitacao.resetar');
+
 Route::middleware('auth')->group(function () {
 
     Route::middleware('cadastro.completo')->group(function () {

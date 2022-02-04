@@ -46,8 +46,7 @@ class ContaController extends Controller
             else
                 return redirect()->route('conta.create', ['user' => $user, 'tipo' => null]);
         } else {
-            $message = 0;
-            return redirect()->route('admin.contas', ['message' => $message]);
+            return redirect()->route('admin.contas')->withErrors(['error' => 'O usuário já possui o máximo de contas!']);
         }
     }
 
@@ -110,11 +109,9 @@ class ContaController extends Controller
         if (($poupanca == 0 && $request->tipo == 0) || ($corrente == 0 && $request->tipo == 1)) {
             $request->validate($regras, $feedbacks);
             Conta::create($request->all());
-            $message = 2;
-        } else {
-            $message = 1;
-        }
-        return redirect()->route('admin.contas', ['message' => $message]);
+            return redirect()->route('admin.contas')->withErrors(['success' => 'Conta criada!']);
+        } else
+            return redirect()->route('admin.contas')->withErrors(['error' => 'O usuário já possui uma conta deste tipo!']);
     }
 
     /**
@@ -161,7 +158,7 @@ class ContaController extends Controller
     {
         if (auth()->user()->is_admin)
             $conta->delete();
-        return redirect()->route('admin.contas');
+        return redirect()->route('admin.contas')->withErrors(['success' => 'Conta desativada!']);
     }
 
     public function revive($conta_id)
@@ -173,7 +170,7 @@ class ContaController extends Controller
         }
         if (!$conta->user->deleted_at)
             $conta->restore();
-        return redirect()->route('admin.contas');
+        return redirect()->route('admin.contas')->withErrors(['success' => 'Conta reativada!']);
     }
 
     public function deposito(Conta $conta, Request $request)
@@ -182,7 +179,7 @@ class ContaController extends Controller
         $conta->save();
         $movimentacao = new Movimentacao();
         $movimentacao->registro($conta->id, $conta->id, $request->valor, 0, 'Depósito', auth()->user()->id);
-        return redirect()->route('conta.index');
+        return redirect()->route('conta.index')->withErrors(['success' => 'Depósito realizado !']);
     }
     public function saque(Conta $conta, Request $request)
     {
@@ -192,7 +189,7 @@ class ContaController extends Controller
             $movimentacao = new Movimentacao();
             $movimentacao->registro($conta->id, $conta->id, $request->valor, 1, 'Saque', auth()->user()->id);
         }
-        return redirect()->route('conta.index');
+        return redirect()->route('conta.index')->withErrors(['success' => 'Saque realizado  !']);
     }
     public function transfer(Conta $conta, Request $request)
     {
@@ -211,7 +208,7 @@ class ContaController extends Controller
                 }
             }
         }
-        return redirect()->route('conta.index');
+        return redirect()->route('conta.index')->withErrors(['success' => 'Transferência realizada  !']);
     }
 
     public function solicita(Request $request)

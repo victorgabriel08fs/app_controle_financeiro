@@ -26,6 +26,7 @@
                                         <th scope="col">Conta</th>
                                         <th scope="col">Solicitação</th>
                                         <th scope="col">Status</th>
+                                        <th scope="col">Resolvido por</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -48,11 +49,16 @@
                                                         <option {{ $solicitacao->status ? '' : 'selected' }} value=0>
                                                             Pendente
                                                         </option>
-                                                        <option {{ $solicitacao->status ? 'selected' : '' }}
-                                                            value=1>Resolvido
+                                                        <option {{ $solicitacao->status ? 'selected' : '' }} value=1>
+                                                            Resolvido
                                                         </option>
                                                     </select>
                                                 </form>
+                                            </td>
+                                            <td>
+                                                @if ($solicitacao->admin_id)
+                                                    {{ $solicitacao->admin->name }}
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach

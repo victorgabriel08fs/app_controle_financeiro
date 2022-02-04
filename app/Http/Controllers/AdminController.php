@@ -45,9 +45,9 @@ class AdminController extends Controller
         return view('admin.index', ['objeto' => $objeto]);
     }
 
-    public function contas($message=null)
+    public function contas()
     {
         $contas = Conta::withTrashed()->orderBy('user_id')->paginate(10);
-        return view('admin.conta.index', ['contas' => $contas, 'message' => $message]);
+        return view('admin.conta.index', ['contas' => $contas]);
     }
 }

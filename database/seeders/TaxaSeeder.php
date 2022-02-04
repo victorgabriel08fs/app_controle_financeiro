@@ -13,6 +13,5 @@ class TaxaSeeder extends Seeder
      */
     public function run()
     {
-        //
     }
 }

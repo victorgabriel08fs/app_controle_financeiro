@@ -188,8 +188,9 @@ class ContaController extends Controller
             $conta->save();
             $movimentacao = new Movimentacao();
             $movimentacao->registro($conta->id, $conta->id, $request->valor, 1, 'Saque', auth()->user()->id);
-        }
-        return redirect()->route('conta.index')->withErrors(['success' => 'Saque realizado  !']);
+            return redirect()->route('conta.index')->withErrors(['success' => 'Saque realizado!']);
+        } else
+            return redirect()->route('conta.index')->withErrors(['error' => 'Saldo insuficiente!']);
     }
     public function transfer(Conta $conta, Request $request)
     {
@@ -205,10 +206,12 @@ class ContaController extends Controller
                     $movimentacao = new Movimentacao();
                     $movimentacao->registro($conta1->id, $conta2->id, $request->valor, 1, 'Transferência', auth()->user()->id);
                     $movimentacao->registro($conta2->id, $conta1->id, $request->valor, 0, 'Transferência', $conta2->user->id);
-                }
+                    return redirect()->route('conta.index')->withErrors(['success' => 'Transferência realizada!']);
+                } else
+                    return redirect()->route('conta.index')->withErrors(['error' => 'Falha!']);
             }
-        }
-        return redirect()->route('conta.index')->withErrors(['success' => 'Transferência realizada  !']);
+        } else
+            return redirect()->route('conta.index')->withErrors(['error' => 'Saldo insuficiente!']);
     }
 
     public function solicita(Request $request)
